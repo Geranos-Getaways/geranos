@@ -13,10 +13,10 @@ const DeepDive = ({params}:any) => {
     <div>
         
         
-        <HeroBanner slug={params.slug}/>
+        {/* <HeroBanner slug={params.slug}/>
 
 
-      <FullDescription slug={params.slug}/>
+      <FullDescription slug={params.slug}/> */}
 
 
 

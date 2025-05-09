@@ -20,12 +20,12 @@ const locations: { title: string; href: string; description: string }[] = [
  
   {
     title: "Punjab",
-    href: "",
+    href: "/location/punjab",
     description: "",
   },
   {
     title: "Uttarakhand",
-    href: "",
+    href: "/location/uttarakhand",
     description:
       "",
   },
