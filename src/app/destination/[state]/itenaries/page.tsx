@@ -1,7 +1,7 @@
 import ItinaryCards from "./itinaryCards";
 
 
-const page = () => {
+const Page = () => {
    
   return (
     
@@ -13,4 +13,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

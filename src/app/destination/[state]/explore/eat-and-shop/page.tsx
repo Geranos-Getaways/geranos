@@ -1,11 +1,11 @@
 'use client'
 import React from 'react'
-import { useDestination } from '../../DestinationContext.tsx'
+import { useDestination } from '../../DestinationContext'
 import styles from "../explore.module.css";
-import EatAndShop from './EatAndShop.tsx';
+import EatAndShop from './EatAndShop';
 
 
-const page = () => {
+const Page = () => {
   const destination = useDestination()
 
   return (
@@ -13,4 +13,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

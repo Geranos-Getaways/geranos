@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 const ItinaryCards = () => {
 
-    const[itineraries, setItineraries] = useState()
+    const[itineraries, setItineraries] = useState<any[]>([]);
     const[loading,setLoading]= useState([])
 
 

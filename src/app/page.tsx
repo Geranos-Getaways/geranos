@@ -68,12 +68,12 @@ export default async function Home() {
 
 
           <div className="mb-12 md:mb-0">
-          <ItinerarySlider 
+          {/* <ItinerarySlider 
           mainTitle="Experiences"
           itineraries={itineraries} 
           destinationFilterSlug="home-page"
           offeringFilterSlug="Tour Packages"
-          />
+          /> */}
           </div>
 
 

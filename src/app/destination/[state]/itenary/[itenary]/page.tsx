@@ -4,14 +4,21 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 
-const page = ({
-  title = 'Greece - Sizzling Days in Greece',
-  destination = 'Greece',
-  duration = '8 Days, 7 Nights',
-  price = '107,090',
-  places = ['Athens, 3D', 'Mikonos, 2D', 'Santorini Airport, 3D'],
-  inclusions = ['Sightseeing', 'Breakfast', 'Airport Transfer'],
-  highlights = [
+const Page = () => {
+  const [itenaryInfo, setItenaryInfo] = useState<any>(null);
+  const [featuredImgUrl, setFeaturedImgUrl] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+
+  const { itenary } = useParams();
+
+  // Default fallback data
+  const defaultTitle = 'Greece - Sizzling Days in Greece';
+  const defaultDestination = 'Greece';
+  const defaultDuration = '8 Days, 7 Nights';
+  const defaultPrice = '107,090';
+  const defaultPlaces = ['Athens, 3D', 'Mikonos, 2D', 'Santorini Airport, 3D'];
+  const defaultInclusions = ['Sightseeing', 'Breakfast', 'Airport Transfer'];
+  const defaultHighlights = [
     {
       image: '/sample1.jpg',
       title: 'Mikonos Island',
@@ -27,63 +34,50 @@ const page = ({
       title: 'Candlelight Dinner in Oia',
       description: 'Enjoy romantic dining with views.',
     },
-  ],
-}) => {
+  ];
 
-  //Itenary Information
-  const[itenaryInfo, setItenaryInfo] = useState(null)
-  const[featuredImgUrl, setFeaturedImgUrl] = useState()
-  const [loading, setLoading] = useState(false)
-
-  //Params
-  const {itenary} = useParams()
- 
-
-  // Fetch Single Itenary page content
-  useEffect(()=>{
-    const fetchSingleItenary = async()=>{
-      setLoading(true)
+  useEffect(() => {
+    const fetchSingleItenary = async () => {
+      setLoading(true);
       try {
-        const res = await fetch(`https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?slug=${itenary}`)
+        const res = await fetch(`https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?slug=${itenary}`);
         const data = await res.json();
-        
-        const imageres = await fetch(`https://dashboard.geranosgetaways.com/wp-json/wp/v2/media/${data[0]?.acf?.thumbnail}`)
-        const imgData = await imageres.json()
-        setFeaturedImgUrl(imgData)
-        
-        if(data){
-          console.log("Single Itenary content fetched successfully: ", data[0])
-          setItenaryInfo(data[0])
 
-          //Set Image
-          setLoading(false)
+        const imageres = await fetch(`https://dashboard.geranosgetaways.com/wp-json/wp/v2/media/${data[0]?.acf?.thumbnail}`);
+        const imgData = await imageres.json();
+        setFeaturedImgUrl(imgData);
+
+        if (data) {
+          setItenaryInfo(data[0]);
         }
       } catch (error) {
-        setLoading(false)
-        console.error("Something went wrong or itenary is not available")
-      } finally{
-        setLoading(false)
+        console.error("Error fetching itinerary:", error);
+      } finally {
+        setLoading(false);
       }
-    }
+    };
 
-    fetchSingleItenary()
-  },[])
+    fetchSingleItenary();
+  }, []);
+
+  const acf = itenaryInfo?.acf;
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {
-        loading ? <div>Loading</div> : (<>{/* Hero Image */}
+      {loading ? (
+        <div>Loading</div>
+      ) : (
+        <>
           <div className="w-full h-[450px] relative">
             <Image
-              src={featuredImgUrl?.link}
+              src={featuredImgUrl?.link || '/fallback.jpg'}
               alt="Hero"
               layout="fill"
               objectFit="cover"
               className="w-full h-full"
             />
           </div>
-    
-          {/* Section Tabs */}
+
           <div className="flex justify-center mt-[-25px] z-10 relative">
             <div className="bg-white rounded-full shadow-lg px-6 py-2 flex gap-6 text-sm">
               <button className="font-medium text-blue-600">Highlights</button>
@@ -91,58 +85,51 @@ const page = ({
               <button className="text-gray-500">Accommodations</button>
             </div>
           </div>
-    
-          {/* Content Section */}
+
           <div className="max-w-7xl mx-auto px-4 mt-12 flex flex-col lg:flex-row gap-12">
-            {/* Left Column */}
             <div className="flex-1">
-              <div className="text-sm text-blue-400 mb-2">{itenaryInfo?.acf?.destination_of_itenary}</div>
-              <h1 className="text-3xl font-bold mb-4"> {itenaryInfo?.title?.rendered}</h1>
+              <div className="text-sm text-blue-400 mb-2">{acf?.destination_of_itenary || defaultDestination}</div>
+              <h1 className="text-3xl font-bold mb-4">{itenaryInfo?.title?.rendered || defaultTitle}</h1>
               <div
-  className="text-gray-600 mb-6"
-  dangerouslySetInnerHTML={{ __html: itenaryInfo?.acf?.full_description || '' }}
-></div>
-    
-              {/* Places */}
+                className="text-gray-600 mb-6"
+                dangerouslySetInnerHTML={{ __html: acf?.full_description || '' }}
+              ></div>
+
               <div className="mb-4">
                 <p className="text-sm font-medium mb-1 text-gray-700">Places</p>
-                <p className="text-gray-600">{places.join(' → ')}</p>
+                <p className="text-gray-600">{defaultPlaces.join(' → ')}</p>
               </div>
-    
-              {/* Duration */}
+
               <div className="mb-4">
                 <p className="text-sm font-medium mb-1 text-gray-700">Duration</p>
-                <p className="text-gray-600">{itenaryInfo?.acf?.days} Days - {itenaryInfo?.acf?.nights} Nights </p>
+                <p className="text-gray-600">
+                  {acf?.days || '8'} Days - {acf?.nights || '7'} Nights
+                </p>
               </div>
-    
-              {/* Pricing */}
+
               <div className="mb-8">
                 <p className="text-sm font-medium mb-1 text-gray-700">Pricing</p>
                 <p className="text-gray-800 font-semibold text-xl">
-                  ₹{itenaryInfo?.acf?.starting_price || 'Not Mentioned'} <span className="text-sm font-light">per person</span>
+                  ₹{acf?.starting_price || defaultPrice}{' '}
+                  <span className="text-sm font-light">per person</span>
                 </p>
               </div>
-    
-              {/* Inclusions */}
+
               <div className="mb-8">
                 <h2 className="text-xl font-semibold mb-4">Inclusions</h2>
                 <div className="flex gap-4 flex-wrap">
-                  {inclusions.map((inc, idx) => (
-                    <span
-                      key={idx}
-                      className="bg-blue-50 text-blue-600 text-sm px-3 py-1 rounded-full border border-blue-200"
-                    >
+                  {defaultInclusions.map((inc, idx) => (
+                    <span key={idx} className="bg-blue-50 text-blue-600 text-sm px-3 py-1 rounded-full border border-blue-200">
                       {inc}
                     </span>
                   ))}
                 </div>
               </div>
-    
-              {/* Highlights */}
+
               <div className="mb-8">
                 <h2 className="text-xl font-semibold mb-4">Highlights</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {highlights.map((highlight, idx) => (
+                  {defaultHighlights.map((highlight, idx) => (
                     <div key={idx} className="rounded-xl overflow-hidden shadow">
                       <div className="relative w-full h-40">
                         <Image
@@ -161,67 +148,36 @@ const page = ({
                 </div>
               </div>
             </div>
-    
-            {/* Right Column (Form) */}
-            <div className="w-full lg:w-1/3 sticky top-28  bottom-20 self-start h-fit bg-white shadow-lg rounded-xl p-6">
 
+            <div className="w-full lg:w-1/3 sticky top-28  bottom-20 self-start h-fit bg-white shadow-lg rounded-xl p-6">
               <div className="flex gap-2 mb-4">
-                <Image
-                  src="/global/Punjab.webp"
-                  alt="Expert"
-                  width={36}
-                  height={36}
-                  className="rounded-full"
-                />
-                <Image
-                  src="/global/Punjab.webp"
-                  alt="Expert"
-                  width={36}
-                  height={36}
-                  className="rounded-full"
-                />
+                <Image src="/global/Punjab.webp" alt="Expert" width={36} height={36} className="rounded-full" />
+                <Image src="/global/Punjab.webp" alt="Expert" width={36} height={36} className="rounded-full" />
               </div>
               <h3 className="text-md font-semibold mb-2">Customise your trip</h3>
               <p className="text-sm text-gray-600 mb-6">
-                with someone who has been to {destination}
+                with someone who has been to {acf?.destination_of_itenary || defaultDestination}
               </p>
-    
+
               <form className="space-y-3">
-                <input
-                  type="text"
-                  placeholder="Full name"
-                  className="w-full border rounded px-4 py-2 focus:outline-none"
-                />
-                <input
-                  type="text"
-                  placeholder="WhatsApp Phone no."
-                  className="w-full border rounded px-4 py-2 focus:outline-none"
-                />
-                <input
-                  type="text"
-                  placeholder="No. of travellers"
-                  className="w-full border rounded px-4 py-2 focus:outline-none"
-                />
-                <input
-                  type="text"
-                  placeholder="Dates of travel"
-                  className="w-full border rounded px-4 py-2 focus:outline-none"
-                />
+                <input type="text" placeholder="Full name" className="w-full border rounded px-4 py-2 focus:outline-none" />
+                <input type="text" placeholder="WhatsApp Phone no." className="w-full border rounded px-4 py-2 focus:outline-none" />
+                <input type="text" placeholder="No. of travellers" className="w-full border rounded px-4 py-2 focus:outline-none" />
+                <input type="text" placeholder="Dates of travel" className="w-full border rounded px-4 py-2 focus:outline-none" />
                 <div className="text-sm text-gray-500">
-                  Starting from <span className="font-semibold text-black">₹{itenaryInfo?.acf?.starting_price || 'Not Mentioned'}</span> per person
+                  Starting from{' '}
+                  <span className="font-semibold text-black">₹{acf?.starting_price || defaultPrice}</span> per person
                 </div>
-                <button
-                  type="submit"
-                  className="w-full mt-2 bg-[#0099cc] text-white py-2 rounded hover:bg-[#007fab] transition"
-                >
+                <button type="submit" className="w-full mt-2 bg-[#0099cc] text-white py-2 rounded hover:bg-[#007fab] transition">
                   PLAN WITH AN EXPERT
                 </button>
               </form>
             </div>
-          </div></>)
-      }
+          </div>
+        </>
+      )}
     </div>
   );
 };
 
-export default page;
+export default Page;

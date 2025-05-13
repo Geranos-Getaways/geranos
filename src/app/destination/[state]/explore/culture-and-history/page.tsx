@@ -2,11 +2,11 @@
 import React from 'react'
 
 import styles from "../explore.module.css";
-import CultureAndHistory from './CultureAndHistory.tsx';
+import CultureAndHistory from './CultureAndHistory';
 import { useDestination } from '../../DestinationContext';
 
 
-const page = () => {
+const Page = () => {
   const destination = useDestination()
 
  
@@ -15,4 +15,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

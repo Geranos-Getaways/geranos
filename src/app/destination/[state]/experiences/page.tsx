@@ -1,10 +1,10 @@
 import React from 'react'
 import ExperiencesCards from './experiencesCards'
 
-const page = () => {
+const Page = () => {
   return (
    <ExperiencesCards/>
   )
 }
 
-export default page
+export default Page

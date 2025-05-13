@@ -3,7 +3,7 @@ import React from 'react'
 import TravelTips from './TravelTips'
 
 
-const page = () => {
+const Page = () => {
  
 
   
@@ -12,4 +12,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page

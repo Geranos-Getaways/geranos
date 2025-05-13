@@ -3,10 +3,10 @@ import React from 'react'
 import ThingsToDo from './ThingsToDo'
 
 
-const page = () => {
+const Page = () => {
   return (
    <ThingsToDo/>
   )
 }
 
-export default page
+export default Page

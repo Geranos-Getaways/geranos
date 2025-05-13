@@ -14,7 +14,7 @@ import TravelTips from './explore/travel-tips/TravelTips';
 
 
 
-const page = ({ params }: { params: { state: string } }) => {
+const Page = ({ params }: { params: { state: string } }) => {
     const destination = useDestination()
    
   
@@ -133,7 +133,7 @@ const page = ({ params }: { params: { state: string } }) => {
   )
 }
 
-export default page
+export default Page
 
 
 
