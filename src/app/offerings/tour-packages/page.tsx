@@ -10,10 +10,18 @@ const Page = () => {
 
   useEffect(() => {
     const fetchOfferings = async () => {
-      const res = await fetch('https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?per_page=50');
-      const data = await res.json();
-      const tourPackagesResponse = data.filter((item: any) => item.acf?.offerings === 'Tour Packages');
-      setTourPackages(tourPackagesResponse);
+      try {
+        const res = await fetch('https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?per_page=50');
+        const data = await res.json();
+        if(data){
+          const tourPackagesResponse = data.filter((item: any) => item.acf?.offerings === 'Tour Packages');
+        setTourPackages(tourPackagesResponse);
+        }
+      } catch (error) {
+        console.error("Something went wrong while fetching offers")
+      } finally{
+        
+      }
     };
 
     fetchOfferings();

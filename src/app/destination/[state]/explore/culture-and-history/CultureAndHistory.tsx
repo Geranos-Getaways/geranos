@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDestination } from '../../DestinationContext'
+import { useDestination } from '../../DestinationContext.tsx'
 import styles from "../explore.module.css";
 
 

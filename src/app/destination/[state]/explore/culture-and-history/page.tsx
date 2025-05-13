@@ -1,8 +1,9 @@
 'use client'
 import React from 'react'
-import { useDestination } from '../../DestinationContext.jsx'
+
 import styles from "../explore.module.css";
-import CultureAndHistory from './CultureAndHistory.jsx';
+import CultureAndHistory from './CultureAndHistory.tsx';
+import { useDestination } from '../../DestinationContext';
 
 
 const page = () => {

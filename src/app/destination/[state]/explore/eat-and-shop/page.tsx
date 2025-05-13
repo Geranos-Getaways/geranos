@@ -1,8 +1,8 @@
 'use client'
 import React from 'react'
-import { useDestination } from '../../DestinationContext.jsx'
+import { useDestination } from '../../DestinationContext.tsx'
 import styles from "../explore.module.css";
-import EatAndShop from './EatAndShop.jsx';
+import EatAndShop from './EatAndShop.tsx';
 
 
 const page = () => {

@@ -1,6 +1,7 @@
 import React from 'react'
-import { useDestination } from '../../DestinationContext'
+
 import styles from "../explore.module.css";
+import { useDestination } from '../../DestinationContext';
 
 const TravelTips = () => {
     const destination = useDestination()
