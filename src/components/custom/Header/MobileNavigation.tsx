@@ -18,8 +18,8 @@ const MobileNavigation = () => {
         <AccordionTrigger>Destinations</AccordionTrigger>
         <AccordionContent>
           <ul className="text-xl flex flex-col gap-4 text-[#2F6BEB] font-semibold font-EduVICWANTBeginner">
-            <li>Punjab</li>
-            <li>Uttarakhand</li>
+            <li><Link href="/destination/punjab">Punjab</Link></li>
+            <li><Link href="/destination/uttarakhand">Uttarakhand</Link></li>
           </ul>
         </AccordionContent>
       </AccordionItem>

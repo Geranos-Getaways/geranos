@@ -20,12 +20,12 @@ const locations: { title: string; href: string; description: string }[] = [
  
   {
     title: "Punjab",
-    href: "/location/punjab",
+    href: "/destination/punjab",
     description: "",
   },
   {
     title: "Uttarakhand",
-    href: "/location/uttarakhand",
+    href: "/destination/uttarakhand",
     description:
       "",
   },
@@ -36,17 +36,17 @@ const experiences: { title: string; href: string; description: string }[] = [
  
   {
     title: "Tour Packages",
-    href: "",
+    href: "/offerings/tour-packages",
     description: "",
   },
   {
     title: "Weekend Getaways",
-    href: "",
+    href: "/offerings/weekend-getaways",
     description: "",
   },
   {
     title: "Experiences",
-    href: "",
+    href: "/offerings/experiences",
     description:"",
   },  
 ]
@@ -66,13 +66,15 @@ export default function NavigationMenuDemo() {
           <NavigationMenuContent>
             <ul className=" grid w-[400px] gap-3 p-4 md:w-[330px] md:grid-cols-1 lg:w-[330px] ">
               {locations.map((location) => (
+                <Link href={location?.href} key={location.title}>
                 <ListItem
-                  key={location.title}
+                  
                   title={location.title}
              
                 >
                   {location.description}
                 </ListItem>
+                </Link>
               ))}
             </ul>
           </NavigationMenuContent>
@@ -84,12 +86,15 @@ export default function NavigationMenuDemo() {
           <NavigationMenuContent>
             <ul className=" grid w-[400px] gap-3 p-4 md:w-[330px] md:grid-cols-1 lg:w-[330px] ">
               {experiences.map((location) => (
+                <Link href={location?.href} key={location.title}>
                 <ListItem
-                  key={location.title}
+                  
                   title={location.title}
                 >
+                  
                   {location.description}
                 </ListItem>
+                </Link>
               ))}
             </ul>
           </NavigationMenuContent>

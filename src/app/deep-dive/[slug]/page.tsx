@@ -3,9 +3,9 @@
 import React from 'react'
 
 
-import HeroBanner from '../../destinations/[slug]/HeroBanner'
-import ShortDescription from '../../destinations/[slug]/ShortDescription'
-import DataCards from '../../destinations/[slug]/DataCards'
+import HeroBanner from '../../destinations_closed/[slug]/HeroBanner'
+import ShortDescription from '../../destinations_closed/[slug]/ShortDescription'
+import DataCards from '../../destinations_closed/[slug]/DataCards'
 import FullDescription from './FullDescription'
 
 const DeepDive = ({params}:any) => {

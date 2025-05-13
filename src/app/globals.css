@@ -2,6 +2,51 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* BROPELLA */
+@font-face {
+  font-family: 'Bropella';
+  src: url('/fonts/Bropella.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* LATO FONT */
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/lato/Lato-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/lato/Lato-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/lato/Lato-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Lato';
+  src: url('/fonts/lato/Lato-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+/* Add more as needed (Light, Thin, Black, etc.) */
+
+
+
+h1,h2,h3,h4,h5,h6,a,p, ul,li {
+  font-family: 'lato';
+}
+
+
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -158,9 +203,13 @@
 }
 
 
-
-
-
 img[btnvisibility="hidden"] {
   display: none !important;
+}
+
+#scroll-container h1, #scroll-container h2, #scroll-container h3, #scroll-container h4, #scroll-container h5, #scroll-container h6{
+  color: #246BEB;
+  font-size: 20px;
+  margin: 20px 0px 5px 0px;
+
 }

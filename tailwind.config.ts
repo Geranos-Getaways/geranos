@@ -34,6 +34,7 @@ const config = {
       BethEllen: ["var(--font-BethEllen)"],
       EduVICWANTBeginner: ["var(--font-EduVICWANTBeginner)"],
       UrbanistLight: ["var(--font-UrbanistLight)"],
+    
     },
     
 
@@ -41,6 +42,12 @@ const config = {
     extend: {
       transitionTimingFunction: {
         "minor-spring": "cubic-bezier(0.18,0.89,0.82,1.04)",
+      },
+
+      fontFamily: {
+        bropella: ['Bropella', 'cursive'],
+        lato: ['Lato', 'sans-serif'],
+        
       },
 
 
