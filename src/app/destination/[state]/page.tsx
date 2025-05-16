@@ -24,8 +24,8 @@ const Page = ({ params }: { params: { state: string } }) => {
 
       <div className=''>
       <section className="bg-white py-0">
-                  <div className="text-center max-w-2xl mx-auto px-4">
-                    <h2 className="text-3xl font-semibold mb-4">{destination?.acf?.short_description?.title}</h2>
+                  <div className="text-center max-w-2xl mx-auto px-4 my-20">
+                    <h2 className="text-3xl font-semibold mb-4 font-tangerine">{destination?.acf?.short_description?.title}</h2>
                     <p className="text-gray-600 text-justify">
                      {destination?.acf?.short_description?.short_description}
                     </p>

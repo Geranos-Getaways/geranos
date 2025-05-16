@@ -21,16 +21,16 @@ const Layout = ({ children, params }: LayoutProps) => {
             <h4 className='uppercase mb-4 font-semibold underline underline-offset-4'>ABOUT {state}</h4>
             <ul className={`space-y-4 text-gray-700 md:text-base px-5 ${styles.explore}`}>
               <li className={`hover:text-blue-600 transition-colors cursor-pointer ${styles.explore}`}>
-                <Link href={`/location/${state}/explore/culture-and-history`}>Culture & History</Link>
+                <Link href={`/destination/${state}/explore/culture-and-history`}>Culture & History</Link>
               </li>
               <li className={`hover:text-blue-600 transition-colors cursor-pointer ${styles.explore}`}>
-                <Link href={`/location/${state}/explore/things-to-do`}>Things To Do</Link>
+                <Link href={`/destination/${state}/explore/things-to-do`}>Things To Do</Link>
               </li>
               <li className={`hover:text-blue-600 transition-colors cursor-pointer ${styles.explore}`}>
-                <Link href={`/location/${state}/explore/eat-and-shop`}>Eat & Shop</Link>
+                <Link href={`/destination/${state}/explore/eat-and-shop`}>Eat & Shop</Link>
               </li>
               <li className={`hover:text-blue-600 transition-colors cursor-pointer ${styles.explore}`}>
-                <Link href={`/location/${state}/explore/travel-tips`}>Travel Tips</Link>
+                <Link href={`/destination/${state}/explore/travel-tips`}>Travel Tips</Link>
               </li>
             </ul>
           </aside>

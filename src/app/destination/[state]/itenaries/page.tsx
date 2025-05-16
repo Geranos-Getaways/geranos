@@ -1,13 +1,19 @@
+'use client'
 import ItinaryCards from "./itinaryCards";
 
-
-const Page = () => {
-   
+interface PageProp{
+  params:{
+    state:string
+  }
+}
+const Page = ({params}:PageProp) => {
+  
+ 
   return (
     
     
    
-    <ItinaryCards/>
+    <ItinaryCards state={params.state}/>
    
  
   );

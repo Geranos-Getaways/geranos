@@ -22,11 +22,11 @@ const Layout = ({ children, params }: LayoutProps) => {
 
       if (destinationInfo) {
         setDestination(destinationInfo[0]);
-        console.log("Destination[0]", destinationInfo[0]?.acf?.large_image)
+      
         const imgres = await fetch(`https://dashboard.geranosgetaways.com/wp-json/wp/v2/media/${destinationInfo[0]?.acf?.large_image}`);
       const imgData = await imgres.json();
       setFeaturedImage(imgData)
-      console.log("Image URl: ", imgData)
+      
       }
     };
     fetchDestination();
@@ -36,8 +36,8 @@ const Layout = ({ children, params }: LayoutProps) => {
 
   return (
     <DestinationContext.Provider value={destination}>
-      <div>
-      <div className="page-hero-section h-[300px] md:h-[700px] overflow-hidden relative flex flex-col items-center">
+      <div >
+      <div className="page-hero-section h-[300px] md:h-[700px] overflow-hidden relative flex flex-col items-center" id='destination-hero-section'>
   <Image 
     width={1920}
     height={500}

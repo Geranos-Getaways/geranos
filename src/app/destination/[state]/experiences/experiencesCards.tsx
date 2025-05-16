@@ -2,8 +2,17 @@
 import React, { useEffect, useState } from 'react'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import Image from "next/image";
+import EventCards from '@/components/custom/EventCards';
+import defaultImage from '../../../../../public/global/Punjab.webp';
+import Link from 'next/link';
 
-const ExperiencesCards = () => {
+interface Prop{
+  state:string
+}
+
+const ExperiencesCards = ({state}:Prop) => {
+
+
   const [itineraries, setItineraries] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -11,12 +20,34 @@ const ExperiencesCards = () => {
     const fetchItineraries = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?destination_of_itenary=punjab`);
+        const res = await fetch(`https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?destination_of_itenary=${state}`);
         const data = await res.json();
 
         if (data) {
-          console.log("Itineraries Data: ", data);
-          setItineraries(data);
+          const filtered = data.filter((item:any)=> item?.acf?.offerings === "Experiences")
+           //fetch featured image
+                const demo = await Promise.all(
+                  filtered.map(async(item:any)=>{
+                    let featuredImage = defaultImage.src
+
+                    try {
+                      const res = await fetch(`https://dashboard.geranosgetaways.com/wp-json/wp/v2/media/${item.acf?.thumbnail}`)
+                      
+                      const imgData = await res.json()
+                      console.log("Image Data: ", imgData)
+                     
+                      featuredImage = imgData?.source_url  || defaultImage.src;
+                    } catch (error) {
+                      console.error("Failed to load featured image for ", item.id)
+                    }
+
+                    return {
+                      ...item, featuredImage,
+                    }
+                  })
+                )
+              console.log("Demo Content: ", demo)
+          setItineraries(demo);
         }
       } catch (error) {
         console.error("Something went wrong while fetching Itineraries");
@@ -36,31 +67,12 @@ const ExperiencesCards = () => {
       <Carousel>
         <CarouselContent>
           {itineraries.map((item, index) => (
-            <CarouselItem className="md:basis-1/4" key={index}>
-              <div className="bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition duration-300">
-                <div className="relative w-full h-52">
-                  <Image
-                    src={item?.image || '/global/Punjab.webp'}
-                    alt={item?.title?.rendered || 'Experience Image'}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-t-2xl"
-                  />
-                  <div className="absolute bottom-4 left-4 text-white z-10">
-                    <h3 className="text-lg font-semibold drop-shadow">{item?.title?.rendered}</h3>
-                    <p className="text-xs uppercase tracking-wide">{item?.acf?.destination_of_itenary}</p>
-                  </div>
-                  <div className="absolute inset-0 bg-black/20 rounded-t-2xl" />
-                </div>
+            <CarouselItem  className=" md:basis-1/2 lg:basis-1/5" key={index}> 
+              <Link href={`/destination/${state}/itenary/${item?.slug}`}> 
+   
 
-                <div className="p-4">
-                  <p className="text-sm text-gray-500">{item?.acf?.nights}</p>
-                  <p className="text-xs uppercase text-gray-400">Starting From</p>
-                  <p className="text-lg font-semibold text-gray-800">
-                    ₹{item?.acf?.starting_price} <span className="text-sm font-light">per person</span>
-                  </p>
-                </div>
-              </div>
+  <EventCards title={item?.title?.rendered} destination={item?.acf?.destination_of_itenary} days={item?.acf?.days} nights={item?.acf?.nights} price={item?.acf?.starting_price} featuredImage={item?.featuredImage}/>
+    </Link>
             </CarouselItem>
           ))}
         </CarouselContent>

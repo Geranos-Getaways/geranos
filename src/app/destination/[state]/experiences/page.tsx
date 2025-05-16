@@ -1,9 +1,18 @@
 import React from 'react'
 import ExperiencesCards from './experiencesCards'
 
-const Page = () => {
+interface PageProp {
+  params: {
+    state: string
+  }
+}
+
+const Page = ({ params }: PageProp) => {
+  const { state } = params
+  console.log("PAGE: State: ", state)
+
   return (
-   <ExperiencesCards/>
+    <ExperiencesCards state={state} />
   )
 }
 
