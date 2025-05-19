@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* BROPELLA */
 @font-face {
   font-family: 'Bropella';
@@ -38,14 +37,39 @@
 }
 /* Add more as needed (Light, Thin, Black, etc.) */
 
-
-
-h1,h2,h3,h4,h5,h6,a,p, ul,li {
-  font-family: 'lato';
+/* styles/global.css */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #2676ff #f0f0f0; /* thumb, track */
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
 
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f0f0f0;
+}
 
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #2676ff;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a,
+p,
+ul,
+li {
+  font-family: 'lato';
+}
 
 @layer base {
   :root {
@@ -113,17 +137,15 @@ h1,h2,h3,h4,h5,h6,a,p, ul,li {
   }
 }
 
-
-
 .postContParaFixCstm p {
-  margin-bottom:20px;
-  font-size:16px; 
+  margin-bottom: 20px;
+  font-size: 16px;
 }
-.postContParaFixCstm ul{
+.postContParaFixCstm ul {
   margin-bottom: 16px;
 }
 
-.postContParaFixCstm img{
+.postContParaFixCstm img {
   margin-bottom: 26px;
 }
 
@@ -133,60 +155,51 @@ h1,h2,h3,h4,h5,h6,a,p, ul,li {
 }
 
 .postContParaFixCstm h2 {
-  font-size:24px;
-  font-weight:bold;
-  margin-bottom:22px; 
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 22px;
 }
 
 .postContParaFixCstm a {
-  color:#246BEB;
-  font-weight:bold;
+  color: #246beb;
+  font-weight: bold;
   text-decoration: underline;
 }
 
-
 .aCstmClass .overflow-hidden {
-  height:100%; 
+  height: 100%;
 }
 
 .aCstmClass .PrevNextBtnCstmCls button {
-  background:none !important; 
-  width: 50px !important; 
-  height:50px !important; 
+  background: none !important;
+  width: 50px !important;
+  height: 50px !important;
 }
-
 
 .aCstmClass .PrevNextBtnCstmCls button:hover {
-  background:white !important; 
+  background: white !important;
 }
-.aCstmClass .PrevNextBtnCstmCls button svg{
-  width: 30px !important; 
-  height:30px !important; 
+.aCstmClass .PrevNextBtnCstmCls button svg {
+  width: 30px !important;
+  height: 30px !important;
 }
 
-@media(max-width:620px) {
-  .slick-prev
-  {
-      top: 90% !important;
-      left: 12% !important;
-  }  
-  .slick-next
-  {
-      top: 90% !important;
-      right: 12% !important;
+@media (max-width: 620px) {
+  .slick-prev {
+    top: 90% !important;
+    left: 12% !important;
+  }
+  .slick-next {
+    top: 90% !important;
+    right: 12% !important;
   }
 }
 
-
-
-@media(max-width:767px) {
-  .cstmClsTestiminial button
-  {
-      display: none !important;
-  }  
+@media (max-width: 767px) {
+  .cstmClsTestiminial button {
+    display: none !important;
+  }
 }
- 
-
 
 /* Footer CSS */
 
@@ -195,21 +208,24 @@ h1,h2,h3,h4,h5,h6,a,p, ul,li {
 }
 
 .testContCstCls {
-  min-width:100% !important; 
+  min-width: 100% !important;
 }
 
 .ff-powered-img {
-  display:none !important; 
-}
-
-
-img[btnvisibility="hidden"] {
   display: none !important;
 }
 
-#scroll-container h1, #scroll-container h2, #scroll-container h3, #scroll-container h4, #scroll-container h5, #scroll-container h6{
-  color: #246BEB;
+img[btnvisibility='hidden'] {
+  display: none !important;
+}
+
+#scroll-container h1,
+#scroll-container h2,
+#scroll-container h3,
+#scroll-container h4,
+#scroll-container h5,
+#scroll-container h6 {
+  color: #246beb;
   font-size: 20px;
   margin: 20px 0px 5px 0px;
-
 }

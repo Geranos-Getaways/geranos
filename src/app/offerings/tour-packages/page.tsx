@@ -101,7 +101,7 @@ const Page = () => {
       </section>
 
       {/* ================== OFFERINGS CAROUSEL SECTION ================== */}
-      <section className="px-6 lg:px-0">
+      <section className="px-4 md:px-6">
         <div className="mb-6 max-w-7xl mx-auto">
           <h2 className="text-3xl font-semibold mb-1">Tour Packages</h2>
           <p className="text-md text-gray-600">
@@ -109,26 +109,25 @@ const Page = () => {
           </p>
         </div>
 
-        <Carousel>
-          <CarouselContent className="-mx-2 max-w-7xl mx-auto">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {tourPackages.map((item, index) => (
-              <CarouselItem key={index} className="md:basis-1/4 px-2">
-                <Link
-                  href={`/destination/${item?.acf?.destination_of_itenary}/itenary/${item?.slug}`}
-                >
-                  <EventCards
-                    title={item?.title?.rendered}
-                    destination={item?.acf?.destination_of_itenary}
-                    days={item?.acf?.days}
-                    nights={item?.acf?.nights}
-                    price={item?.acf?.starting_price}
-                    featuredImage={item?.featuredImage}
-                  />
-                </Link>
-              </CarouselItem>
+              <Link
+                key={index}
+                href={`/destination/${item?.acf?.destination_of_itenary}/itenary/${item?.slug}`}
+              >
+                <EventCards
+                  title={item?.title?.rendered}
+                  destination={item?.acf?.destination_of_itenary}
+                  days={item?.acf?.days}
+                  nights={item?.acf?.nights}
+                  price={item?.acf?.starting_price}
+                  featuredImage={item?.featuredImage}
+                />
+              </Link>
             ))}
-          </CarouselContent>
-        </Carousel>
+          </div>
+        </div>
       </section>
     </div>
   );

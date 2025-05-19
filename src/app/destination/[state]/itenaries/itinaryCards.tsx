@@ -62,7 +62,7 @@ const ItinaryCards = ({ state }: Props) => {
     };
 
     fetchItenaries();
-  }, []);
+  }, [state]);
 
   return (
     <>
