@@ -1,19 +1,16 @@
-import React from 'react'
-import ExperiencesCards from './experiencesCards'
+import React from 'react';
+import ExperiencesCards from './experiencesCards';
 
 interface PageProp {
   params: {
-    state: string
-  }
+    state: string;
+  };
 }
 
 const Page = ({ params }: PageProp) => {
-  const { state } = params
-  console.log("PAGE: State: ", state)
+  const { state } = params;
 
-  return (
-    <ExperiencesCards state={state} />
-  )
-}
+  return <ExperiencesCards state={state} />;
+};
 
-export default Page
+export default Page;

@@ -17,9 +17,8 @@ interface Props {
   state: string; // 👈 Define the single prop here
 }
 
-const ItinaryCards = ({ state }: Props) => {
+const WeekendGetaways = ({ state }: Props) => {
   const [itineraries, setItineraries] = useState<any[]>([]);
-
   const [loading, setLoading] = useState([]);
 
   useEffect(() => {
@@ -31,14 +30,15 @@ const ItinaryCards = ({ state }: Props) => {
         const data = await res.json();
 
         if (data && Array.isArray(data)) {
+          // ✅ Filter for 'Experiences' offering
           const filtered = data.filter(
-            (item) => item?.acf?.offerings?.toLowerCase() === 'tour packages'
+            (item) => item?.acf?.offerings?.toLowerCase() === 'experiences'
           );
 
           setItineraries(filtered);
         }
       } catch (error) {
-        console.error('Something went wrong while fetching Itineraries');
+        console.error('Something went wrong while fetching Itineraries', error);
       }
     };
 
@@ -49,7 +49,7 @@ const ItinaryCards = ({ state }: Props) => {
     <>
       {/* Tour Packages */}
       <div className="py-12 px-2 md:px-16">
-        <h2 className="text-3xl font-bold mb-2">Tour Packages</h2>
+        <h2 className="text-3xl font-bold mb-2">Weekend Getaways</h2>
         <p className="text-gray-500 mb-8">Current favourites for travellers like you</p>
 
         <Carousel>
@@ -78,4 +78,4 @@ const ItinaryCards = ({ state }: Props) => {
   );
 };
 
-export default ItinaryCards;
+export default WeekendGetaways;

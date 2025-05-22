@@ -1,9 +1,9 @@
 'use client';
 import React from 'react';
-import CultureAndHistory from './CultureAndHistory';
+import GettingAround from './GettingAround';
 
 const Page = () => {
-  return <CultureAndHistory />;
+  return <GettingAround />;
 };
 
 export default Page;

@@ -1,21 +1,18 @@
-'use client'
-import ItinaryCards from "./itinaryCards";
+'use client';
+import ItinaryCards from './itinaryCards';
+import WeekendGetaways from './weekendGetaways';
 
-interface PageProp{
-  params:{
-    state:string
-  }
+interface PageProp {
+  params: {
+    state: string;
+  };
 }
-const Page = ({params}:PageProp) => {
-  
- 
+const Page = ({ params }: PageProp) => {
   return (
-    
-    
-   
-    <ItinaryCards state={params.state}/>
-   
- 
+    <div>
+      <ItinaryCards state={params.state} />
+      <WeekendGetaways state={params.state} />
+    </div>
   );
 };
 

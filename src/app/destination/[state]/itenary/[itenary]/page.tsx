@@ -11,10 +11,13 @@ import {
 } from '@/components/ui/accordion';
 import styles from './itenary.module.css';
 import SingleItenarySidebar from './SingleItenarySidebar';
+import Link from 'next/link';
+import DayWise from './DayWise';
 
 const Page = () => {
   const [itenaryInfo, setItenaryInfo] = useState<any>(null);
   const [featuredImgUrl, setFeaturedImgUrl] = useState<any>(null);
+  const [dayWise, setDayWise] = useState<any>(null);
   const [loading, setLoading] = useState(false);
 
   const { itenary } = useParams();
@@ -36,15 +39,8 @@ const Page = () => {
         );
         const data = await res.json();
 
-        const imageres = await fetch(
-          `https://dashboard.geranosgetaways.com/wp-json/wp/v2/media/${data[0]?.acf?.thumbnail}`
-        );
-        const imgData = await imageres.json();
-        setFeaturedImgUrl(imgData);
-
         if (data) {
           setItenaryInfo(data[0]);
-          console.log(data[0]);
         }
       } catch (error) {
         console.error('Error fetching itinerary:', error);
@@ -66,21 +62,23 @@ const Page = () => {
         <>
           <div className="w-full h-[450px] relative">
             <Image
-              src={featuredImgUrl?.link || '/fallback.jpg'}
+              src={acf?.thumbnail || '/fallback.jpg'}
               alt="Hero"
               layout="fill"
               objectFit="cover"
               className="w-full h-full"
             />
           </div>
-          {/* 
+
           <div className="flex justify-center mt-[-25px] z-10 relative">
             <div className="bg-white rounded-full shadow-lg px-6 py-2 flex gap-6 text-sm">
               <button className="font-medium text-blue-600">Highlights</button>
-              <button className="text-gray-500">Daywise</button>
+              <Link href="#dayWise">
+                <button className="text-gray-500">Daywise</button>
+              </Link>
               <button className="text-gray-500">Accommodations</button>
             </div>
-          </div> */}
+          </div>
 
           <div className="max-w-7xl mx-auto px-4 mt-12 flex flex-col lg:flex-row gap-12">
             <div className="flex-1">
@@ -175,6 +173,8 @@ const Page = () => {
                   </Accordion>
                 </div>
               </div>
+
+              <DayWise daywise={acf?.daywise} />
             </div>
 
             <SingleItenarySidebar

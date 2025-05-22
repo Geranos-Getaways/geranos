@@ -4,7 +4,7 @@ import { useDestination } from '../DestinationContext';
 
 const ExplorePage = () => {
   const destination = useDestination(); // ✅ Get shared state from layout context
-
+  console.log('At ag glance: ', destination);
   return (
     <div className="flex flex-col md:flex-row gap-6 md:gap-10 px-4 md:px-10 py-10 max-w-screen-xl mx-auto">
       {/* Sidebar */}
@@ -12,12 +12,12 @@ const ExplorePage = () => {
         <ul className="space-y-3 text-md capitalize font-medium text-gray-700">
           <li>
             <a href="#full-description" className="hover:text-blue-600 transition-colors">
-              {destination?.acf?.full_description?.title || "Overview"}
+              {destination?.acf?.full_description?.title || 'Overview'}
             </a>
           </li>
           <li>
             <a href="#full-description1" className="hover:text-blue-600 transition-colors">
-              {destination?.acf?.full_description?.title || "More Info"}
+              {destination?.acf?.full_description?.title || 'More Info'}
             </a>
           </li>
         </ul>

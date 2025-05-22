@@ -2,8 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-import defaultImage from '../../../../public/global/Punjab.webp';
-import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import defaultImage from '../../../../public/global/Tour_Packages.jpg';
 import EventCards from '@/components/custom/EventCards';
 import Link from 'next/link';
 
@@ -39,26 +38,7 @@ const Page = () => {
         if (data) {
           const filtered = data.filter((item: any) => item.acf?.offerings === 'Tour Packages');
 
-          const enriched = await Promise.all(
-            filtered.map(async (item: any) => {
-              let featuredImage = defaultImage.src;
-              try {
-                const mediaRes = await fetch(
-                  `https://dashboard.geranosgetaways.com/wp-json/wp/v2/media/${item.acf?.thumbnail}`
-                );
-                const media = await mediaRes.json();
-                featuredImage = media?.source_url || defaultImage.src;
-              } catch (err) {
-                console.warn(`Failed to load media for item ${item.id}`);
-              }
-              return {
-                ...item,
-                featuredImage,
-              };
-            })
-          );
-          console.log('STATE URL FETCH: ', enriched);
-          setTourPackages(enriched);
+          setTourPackages(filtered);
         }
       } catch (error) {
         console.error('Something went wrong while fetching offers', error);
@@ -70,33 +50,21 @@ const Page = () => {
 
   return (
     <div className="flex flex-col gap-16">
-      {/* ================== HERO SECTION ================== */}
+      {/* ========== HERO SECTION ========== */}
       <section
-        className="w-full bg-cover bg-center text-white py-20"
+        className="w-full bg-cover bg-center text-white py-20 px-4 sm:px-6 md:px-8 flex justify-center items-center min-h-[50vh]"
         style={{
           backgroundImage: `linear-gradient(to right, rgba(0,0,0,0.6), rgba(0,0,0,0.2)), url(${defaultImage.src})`,
         }}
       >
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-10">
-          <div className="md:w-1/2">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6 font-bropella leading-tight">
-              Lorem ipsum dolor sit amet.
-            </h1>
-            <p className="text-lg">
-              Discover cultural tourPackages, spiritual sites, local food, and vibrant festivals —
-              everything that makes Punjab unforgettable.
-            </p>
-          </div>
-
-          <div className="md:w-1/2 flex justify-center">
-            <Image
-              src={defaultImage}
-              alt="Punjab Scenic"
-              className="rounded-xl shadow-lg"
-              width={500}
-              height={350}
-            />
-          </div>
+        <div className="max-w-7xl mx-auto flex flex-col text-center items-center gap-6">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold font-bropella leading-tight">
+            Tour Packages
+          </h1>
+          <p className="text-base sm:text-lg max-w-2xl">
+            Discover cultural experiences, spiritual sites, local food, and vibrant festivals —
+            everything that makes Punjab unforgettable.
+          </p>
         </div>
       </section>
 
@@ -122,7 +90,7 @@ const Page = () => {
                   days={item?.acf?.days}
                   nights={item?.acf?.nights}
                   price={item?.acf?.starting_price}
-                  featuredImage={item?.featuredImage}
+                  featuredImage={String(item?.acf?.thumbnail)} // <- this fixes the error
                 />
               </Link>
             ))}

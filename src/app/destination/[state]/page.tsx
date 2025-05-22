@@ -1,9 +1,5 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Itenary from './Itenary';
-import Experiences from './Experiences';
-import DeepDive from './DeepDive';
-import CustomizeTrip from './CustomizeTrip';
 import { useDestination } from './DestinationContext';
 import styles from './explore/explore.module.css';
 import CultureAndHistory from './explore/culture-and-history/CultureAndHistory';
@@ -120,7 +116,31 @@ const Page = ({ params }: { params: { state: string } }) => {
                             : 'text-gray-700 hover:text-blue-600 border-transparent'
                         }`}
                       >
+                        At a Glance
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#cultureandhistory"
+                        className={`block transition-colors pl-4 border-l-4 ${
+                          activeSection === 'cultureandhistory'
+                            ? 'text-blue-600 font-semibold border-blue-600 bg-blue-50'
+                            : 'text-gray-700 hover:text-blue-600 border-transparent'
+                        }`}
+                      >
                         Culture & History
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#cultureandhistory"
+                        className={`block transition-colors pl-4 border-l-4 ${
+                          activeSection === 'cultureandhistory'
+                            ? 'text-blue-600 font-semibold border-blue-600 bg-blue-50'
+                            : 'text-gray-700 hover:text-blue-600 border-transparent'
+                        }`}
+                      >
+                        Travel Etiquettes
                       </a>
                     </li>
                     <li>
@@ -145,6 +165,18 @@ const Page = ({ params }: { params: { state: string } }) => {
                         }`}
                       >
                         Eat & Shop
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="#eatandshop"
+                        className={`block transition-colors pl-4 border-l-4 ${
+                          activeSection === 'eatandshop'
+                            ? 'text-blue-600 font-semibold border-blue-600 bg-blue-50'
+                            : 'text-gray-700 hover:text-blue-600 border-transparent'
+                        }`}
+                      >
+                        Getting Around
                       </a>
                     </li>
                     <li>
