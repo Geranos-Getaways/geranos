@@ -39,7 +39,7 @@ const Page = ({ params }: { params: { state: string } }) => {
     <div className="page-wrapper min-h-[70vh] ">
       <div>
         <section className="bg-white py-0">
-          <div className="text-center max-w-2xl mx-auto px-4 my-20">
+          <div className="text-center max-w-2xl mx-auto p-4 md:px-4 md:my-20">
             <h2 className="text-3xl font-semibold mb-4 font-tangerine">
               {destination?.acf?.short_description?.title}
             </h2>
@@ -73,7 +73,7 @@ const Page = ({ params }: { params: { state: string } }) => {
             <div className="flex justify-center mb-3">
               <div className="bg-orange-100 text-orange-500 p-2 rounded-full text-xl">🗣️</div>
             </div>
-            <h3 className="font-semibold text-lg mb-1">Speak</h3>
+            <h3 className="font-semibold text-lg mb-1">Language</h3>
             <p className="text-sm text-gray-500">{destination?.acf?.speaks}</p>
           </div>
 
@@ -82,7 +82,7 @@ const Page = ({ params }: { params: { state: string } }) => {
             <div className="flex justify-center mb-3">
               <div className="bg-green-100 text-green-500 p-2 rounded-full text-xl">💰</div>
             </div>
-            <h3 className="font-semibold text-lg mb-1">Money Matters</h3>
+            <h3 className="font-semibold text-lg mb-1">Currency</h3>
             <p className="text-sm text-gray-500">{destination?.acf?.currency}</p>
           </div>
         </div>

@@ -13,6 +13,7 @@ import styles from './itenary.module.css';
 import SingleItenarySidebar from './SingleItenarySidebar';
 import Link from 'next/link';
 import DayWise from './DayWise';
+import Highlights from './Highlights';
 
 const Page = () => {
   const [itenaryInfo, setItenaryInfo] = useState<any>(null);
@@ -41,6 +42,7 @@ const Page = () => {
 
         if (data) {
           setItenaryInfo(data[0]);
+          console.log(data[0]);
         }
       } catch (error) {
         console.error('Error fetching itinerary:', error);
@@ -60,7 +62,7 @@ const Page = () => {
         <div>Loading</div>
       ) : (
         <>
-          <div className="w-full h-[450px] relative">
+          <div className="w-full h-[290px] md:h-[450px] relative">
             <Image
               src={acf?.thumbnail || '/fallback.jpg'}
               alt="Hero"
@@ -175,6 +177,7 @@ const Page = () => {
               </div>
 
               <DayWise daywise={acf?.daywise} />
+              <Highlights highlights={acf?.highlight_images} />
             </div>
 
             <SingleItenarySidebar

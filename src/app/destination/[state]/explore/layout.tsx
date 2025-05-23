@@ -13,7 +13,7 @@ const Layout = ({ children, params }: LayoutProps) => {
 
   return (
     <div className="flex flex-col items-center">
-      <div className="flex flex-col md:flex-row gap-8 px-10 w-[90%] relative">
+      <div className="flex flex-col md:flex-row gap-8 md:px-10 w-[90%] relative">
         {/* Wrapper for absolute sidebar */}
         <div className="relative md:w-1/4">
           <aside className="sticky top-28 left-0 w-full shadow-sm p-4 h-fit rounded-2xl z-10">
