@@ -16,6 +16,9 @@ interface ExperienceItem {
     starting_price: string;
     thumbnail: string | number;
     destination_of_itenary: string;
+    destination: {
+      post_title: string;
+    };
     days: string;
     nights: string;
   };
