@@ -35,6 +35,8 @@ const ItinaryCards = ({ state }: Props) => {
             (item) => item?.acf?.offerings?.toLowerCase() === 'tour packages'
           );
 
+          console.log('Itenaries: ', filtered);
+
           setItineraries(filtered);
         }
       } catch (error) {
@@ -60,7 +62,7 @@ const ItinaryCards = ({ state }: Props) => {
                   <Link href={`/destination/${state}/itenary/${item?.slug}`}>
                     <EventCards
                       title={item?.title?.rendered}
-                      destination={item?.acf?.destination_of_itenary}
+                      destination={item?.acf?.destination?.post_title}
                       days={item?.acf?.days}
                       nights={item?.acf?.nights}
                       price={item?.acf?.starting_price}

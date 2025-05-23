@@ -96,7 +96,7 @@ const Page = () => {
                 /> */}
                 <ExperiencesCards
                   title={item?.title?.rendered}
-                  destination={item?.acf?.destination_of_itenary}
+                  destination={item?.acf?.destination?.post_title}
                   days={item?.acf?.days}
                   nights={item?.acf?.nights}
                   price={item?.acf?.starting_price}
