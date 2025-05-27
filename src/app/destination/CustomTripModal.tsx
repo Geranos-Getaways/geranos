@@ -1,14 +1,14 @@
-import { useState } from "react";
-import Image from "next/image";
+import { useState } from 'react';
+import Image from 'next/image';
 
 const CustomTripModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    people: "",
-    city: "",
+    name: '',
+    email: '',
+    phone: '',
+    people: '',
+    city: '',
   });
 
   const handleChange = (e: any) => {
@@ -32,16 +32,16 @@ const CustomTripModal = () => {
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center px-5">
           <div className="bg-white rounded-2xl overflow-hidden shadow-xl w-full max-w-4xl flex flex-col md:flex-row">
             {/* Left Image */}
-            <div className="relative w-full md:w-1/2 h-72 md:h-auto">
+            <div className="relative w-full md:w-1/2 h-56 md:h-auto">
               <Image
                 src="/global/Punjab.webp" // your image path
                 alt="Custom Trip"
                 layout="fill"
                 objectFit="cover"
-                className="rounded-l-2xl"
+                className="md:rounded-l-2xl"
               />
             </div>
 

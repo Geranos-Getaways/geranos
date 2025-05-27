@@ -40,6 +40,7 @@ const Page = () => {
 
         if (data) {
           const filtered = data.filter((item: any) => item.acf?.offerings === 'Tour Packages');
+          console.log('Filtered: ', filtered);
 
           setTourPackages(filtered);
         }
@@ -72,34 +73,36 @@ const Page = () => {
       </section>
 
       {/* ================== OFFERINGS CAROUSEL SECTION ================== */}
-      <section className="px-4 md:px-6">
-        <div className="mb-6 max-w-7xl mx-auto">
-          <h2 className="text-3xl font-semibold mb-1">Tour Packages</h2>
-          <p className="text-md text-gray-600">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </p>
-        </div>
-
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {tourPackages.map((item, index) => (
-              <Link
-                key={index}
-                href={`/destination/${item?.acf?.destination_of_itenary}/itenary/${item?.slug}`}
-              >
-                <EventCards
-                  title={item?.title?.rendered}
-                  destination={item?.acf?.destination?.post_title}
-                  days={item?.acf?.days}
-                  nights={item?.acf?.nights}
-                  price={item?.acf?.starting_price}
-                  featuredImage={String(item?.acf?.thumbnail)} // <- this fixes the error
-                />
-              </Link>
-            ))}
+      {tourPackages.length > 0 && (
+        <section className="px-4 md:px-6">
+          <div className="mb-6 max-w-7xl mx-auto">
+            <h2 className="text-3xl font-semibold mb-1">Tour Packages</h2>
+            <p className="text-md text-gray-600">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </p>
           </div>
-        </div>
-      </section>
+
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {tourPackages.map((item, index) => (
+                <Link
+                  key={index}
+                  href={`/destination/${item?.acf?.destination?.post_title}/itinerary/${item?.slug}`}
+                >
+                  <EventCards
+                    title={item?.title?.rendered}
+                    destination={item?.acf?.destination?.post_title}
+                    days={item?.acf?.days}
+                    nights={item?.acf?.nights}
+                    price={item?.acf?.starting_price}
+                    featuredImage={String(item?.acf?.thumbnail)} // <- this fixes the error
+                  />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 };

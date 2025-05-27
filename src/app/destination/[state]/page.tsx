@@ -6,6 +6,9 @@ import CultureAndHistory from './explore/culture-and-history/CultureAndHistory';
 import ThingsToDo from './explore/things-to-do/ThingsToDo';
 import EatAndShop from './explore/eat-and-shop/EatAndShop';
 import TravelTips from './explore/travel-tips/TravelTips';
+import AtAGlance from './explore/at-a-glance/AtAGlance';
+import TravelEtiquettes from './explore/travel-etiquettes/TravelEtiquettes';
+import GettingAround from './explore/getting-around/GettingAround';
 
 const Page = ({ params }: { params: { state: string } }) => {
   const destination = useDestination();
@@ -100,119 +103,64 @@ const Page = ({ params }: { params: { state: string } }) => {
           </div>
 
           {exploreVisibility && (
-            <div className="px-4 md:px-10 py-10 w-full max-w-screen-xl mx-auto relative mt-20">
+            <div className="relative mt-20 px-4 md:px-10 py-10 w-full max-w-screen-xl mx-auto">
               <div className="flex flex-col md:flex-row gap-8">
-                {/* Sidebar */}
-                <aside className="w-full md:w-1/4 bg-white border rounded-xl shadow-sm p-4 h-fit sticky top-28">
+                {/* Sidebar Navigation */}
+                <aside className="w-full md:w-1/4 h-fit sticky top-24 md:top-28 bg-white">
                   <ul
-                    className={`space-y-4 text-gray-700 font-medium text-lg md:text-base ${styles.explore}`}
+                    className={`flex md:block overflow-x-auto md:overflow-visible whitespace-nowrap md:whitespace-normal 
+            text-gray-700 font-medium text-sm sm:text-base gap-2 md:gap-0 pb-2 md:pb-0 border-b md:border-none ${styles.explore}`}
                   >
-                    <li>
-                      <a
-                        href="#cultureandhistory"
-                        className={`block transition-colors pl-4 border-l-4 ${
-                          activeSection === 'cultureandhistory'
-                            ? 'text-blue-600 font-semibold border-blue-600 bg-blue-50'
-                            : 'text-gray-700 hover:text-blue-600 border-transparent'
-                        }`}
-                      >
-                        At a Glance
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#cultureandhistory"
-                        className={`block transition-colors pl-4 border-l-4 ${
-                          activeSection === 'cultureandhistory'
-                            ? 'text-blue-600 font-semibold border-blue-600 bg-blue-50'
-                            : 'text-gray-700 hover:text-blue-600 border-transparent'
-                        }`}
-                      >
-                        Culture & History
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#cultureandhistory"
-                        className={`block transition-colors pl-4 border-l-4 ${
-                          activeSection === 'cultureandhistory'
-                            ? 'text-blue-600 font-semibold border-blue-600 bg-blue-50'
-                            : 'text-gray-700 hover:text-blue-600 border-transparent'
-                        }`}
-                      >
-                        Travel Etiquettes
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#thingstodo"
-                        className={`block transition-colors pl-4 border-l-4 ${
-                          activeSection === 'thingstodo'
-                            ? 'text-blue-600 font-semibold border-blue-600 bg-blue-50'
-                            : 'text-gray-700 hover:text-blue-600 border-transparent'
-                        }`}
-                      >
-                        Things To Do
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#eatandshop"
-                        className={`block transition-colors pl-4 border-l-4 ${
-                          activeSection === 'eatandshop'
-                            ? 'text-blue-600 font-semibold border-blue-600 bg-blue-50'
-                            : 'text-gray-700 hover:text-blue-600 border-transparent'
-                        }`}
-                      >
-                        Eat & Shop
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#eatandshop"
-                        className={`block transition-colors pl-4 border-l-4 ${
-                          activeSection === 'eatandshop'
-                            ? 'text-blue-600 font-semibold border-blue-600 bg-blue-50'
-                            : 'text-gray-700 hover:text-blue-600 border-transparent'
-                        }`}
-                      >
-                        Getting Around
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#traveltips"
-                        className={`block transition-colors pl-4 border-l-4 ${
-                          activeSection === 'traveltips'
-                            ? 'text-blue-600 font-semibold border-blue-600 bg-blue-50'
-                            : 'text-gray-700 hover:text-blue-600 border-transparent'
-                        }`}
-                      >
-                        Travel Tips
-                      </a>
-                    </li>
+                    {[
+                      { id: 'ataglance', label: 'At a Glance' },
+                      { id: 'cultureandhistory', label: 'Culture & History' },
+                      { id: 'traveletiquettes', label: 'Travel Etiquettes' },
+                      { id: 'thingstodo', label: 'Things To Do' },
+                      { id: 'eatandshop', label: 'Eat & Shop' },
+                      { id: 'gettingaround', label: 'Getting Around' },
+                      { id: 'traveltips', label: 'Travel Tips' },
+                    ].map(({ id, label }) => (
+                      <li key={id} className="shrink-0">
+                        <a
+                          href={`#${id}`}
+                          className={`block px-4 py-2 transition-colors border-b-2 md:border-l-4 md:border-b-0 ${
+                            activeSection === id
+                              ? 'text-blue-600 font-semibold border-blue-600 bg-blue-50'
+                              : 'text-gray-700 hover:text-blue-600 border-transparent'
+                          }`}
+                        >
+                          {label}
+                        </a>
+                      </li>
+                    ))}
                   </ul>
                 </aside>
 
-                {/* Main Content */}
+                {/* Main Content Sections */}
                 <main
                   className={`w-full md:w-3/4 bg-white p-6 rounded-xl shadow-sm h-[700px] overflow-y-scroll scroll-smooth scroll-pt-28 custom-scrollbar ${styles.explore}`}
                 >
-                  <div id="cultureandhistory" className="mt-15 scroll-mt-28">
+                  <section id="ataglance">
+                    <AtAGlance />
+                  </section>
+                  <section id="cultureandhistory">
                     <CultureAndHistory />
-                  </div>
-
-                  <div id="thingstodo" className="mt-28 scroll-mt-28">
+                  </section>
+                  <section id="traveletiquettes">
+                    <TravelEtiquettes />
+                  </section>
+                  <section id="thingstodo">
                     <ThingsToDo />
-                  </div>
-
-                  <div id="eatandshop" className="mt-28 scroll-mt-28">
+                  </section>
+                  <section id="eatandshop">
                     <EatAndShop />
-                  </div>
-
-                  <div id="traveltips" className="mt-28 scroll-mt-28">
+                  </section>
+                  <section id="gettingaround">
+                    <GettingAround />
+                  </section>
+                  <section id="traveltips">
                     <TravelTips />
-                  </div>
+                  </section>
                 </main>
               </div>
             </div>

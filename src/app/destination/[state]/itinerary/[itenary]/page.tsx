@@ -14,6 +14,7 @@ import SingleItenarySidebar from './SingleItenarySidebar';
 import Link from 'next/link';
 import DayWise from './DayWise';
 import Highlights from './Highlights';
+import Accomodations from './Accomodation';
 
 const Page = () => {
   const [itenaryInfo, setItenaryInfo] = useState<any>(null);
@@ -42,7 +43,7 @@ const Page = () => {
 
         if (data) {
           setItenaryInfo(data[0]);
-          console.log(data[0]);
+          console.log(data[0]?.acf);
         }
       } catch (error) {
         console.error('Error fetching itinerary:', error);
@@ -78,7 +79,9 @@ const Page = () => {
               <Link href="#dayWise">
                 <button className="text-gray-500">Daywise</button>
               </Link>
-              <button className="text-gray-500">Accommodations</button>
+              <Link href="#accomodations">
+                <button className="text-gray-500">Accommodations</button>
+              </Link>
             </div>
           </div>
 
@@ -176,8 +179,11 @@ const Page = () => {
                 </div>
               </div>
 
-              <DayWise daywise={acf?.daywise} />
               <Highlights highlights={acf?.highlight_images} />
+
+              <DayWise daywise={acf?.daywise} />
+
+              <Accomodations accomodations={acf?.accomodations} />
             </div>
 
             <SingleItenarySidebar

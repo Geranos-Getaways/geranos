@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Carousel,
   CarouselContent,
@@ -7,20 +7,18 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import Image from 'next/image';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import EventCards from '@/components/custom/EventCards';
 import defaultImage from '../../../../../public/global/Punjab.webp';
 
 interface Props {
-  state: string; // 👈 Define the single prop here
+  state: string;
 }
 
 const ItinaryCards = ({ state }: Props) => {
   const [itineraries, setItineraries] = useState<any[]>([]);
-
-  const [loading, setLoading] = useState([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchItenaries = async () => {
@@ -35,12 +33,13 @@ const ItinaryCards = ({ state }: Props) => {
             (item) => item?.acf?.offerings?.toLowerCase() === 'tour packages'
           );
 
-          console.log('Itenaries: ', filtered);
-
+          console.log('Itineraries:', filtered);
           setItineraries(filtered);
         }
       } catch (error) {
-        console.error('Something went wrong while fetching Itineraries');
+        console.error('Something went wrong while fetching Itineraries', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -49,33 +48,33 @@ const ItinaryCards = ({ state }: Props) => {
 
   return (
     <>
-      {/* Tour Packages */}
-      <div className="py-12 px-2 md:px-16">
-        <h2 className="text-3xl font-bold mb-2">Tour Packages</h2>
-        <p className="text-gray-500 mb-8">Current favourites for travellers like you</p>
+      {!loading && itineraries.length > 0 && (
+        <div className="py-12 px-2 md:px-16">
+          <h2 className="text-3xl font-bold mb-2">Tour Packages</h2>
+          <p className="text-gray-500 mb-8">Current favourites for travellers like you</p>
 
-        <Carousel>
-          <CarouselContent>
-            {itineraries &&
-              itineraries.map((item, index) => (
-                <CarouselItem className=" md:basis-1/2 lg:basis-1/5" key={item?.title?.rendered}>
-                  <Link href={`/destination/${state}/itenary/${item?.slug}`}>
+          <Carousel>
+            <CarouselContent>
+              {itineraries.map((item) => (
+                <CarouselItem className="md:basis-1/2 lg:basis-1/5" key={item?.title?.rendered}>
+                  <Link href={`/destination/${state}/itinerary/${item?.slug}`}>
                     <EventCards
                       title={item?.title?.rendered}
                       destination={item?.acf?.destination?.post_title}
                       days={item?.acf?.days}
                       nights={item?.acf?.nights}
                       price={item?.acf?.starting_price}
-                      featuredImage={item?.acf?.thumbnail}
+                      featuredImage={item?.acf?.thumbnail || defaultImage}
                     />
                   </Link>
                 </CarouselItem>
               ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
-      </div>
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
+      )}
     </>
   );
 };

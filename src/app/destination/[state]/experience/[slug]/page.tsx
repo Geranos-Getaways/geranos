@@ -20,6 +20,9 @@ interface ExperienceData {
     location?: string;
     highlight_images: any;
     tags?: string[];
+    whats_included: string;
+    whats_not_included: string;
+    experiences_featured_cards: any;
   };
 }
 
@@ -103,18 +106,30 @@ const PageTemplate = ({ params }: PageProp) => {
       {/* Info Cards */}
       <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
         <div className="bg-blue-50 p-6 rounded-lg shadow">
-          <h4 className="font-semibold text-lg">Travel For</h4>
-          <p className="text-blue-600 mt-2">Adventure | Vacation</p>
+          <h4 className="font-semibold text-lg">
+            {singleExperience?.acf?.experiences_featured_cards?.card1?.title}
+          </h4>
+          <p className="text-blue-600 mt-2">
+            {singleExperience?.acf?.experiences_featured_cards?.card1?.description}
+          </p>
         </div>
         <div className="bg-orange-50 p-6 rounded-lg shadow">
-          <h4 className="font-semibold text-lg">Best Place</h4>
+          <h4 className="font-semibold text-lg">
+            {singleExperience?.acf?.experiences_featured_cards?.card2?.title}
+          </h4>
           <p className="text-orange-600 mt-2">
-            {singleExperience.acf?.location || 'Unknown Location'}
+            {singleExperience?.acf?.experiences_featured_cards?.card2?.description}
           </p>
         </div>
         <div className="bg-purple-50 p-6 rounded-lg shadow">
-          <h4 className="font-semibold text-lg">Duration</h4>
-          <p className="text-purple-600 mt-2">{singleExperience.acf?.duration || 'N/A'}</p>
+          <h4 className="font-semibold text-lg">
+            {' '}
+            {singleExperience?.acf?.experiences_featured_cards?.card3?.title}
+          </h4>
+          <p className="text-purple-600 mt-2">
+            {' '}
+            {singleExperience?.acf?.experiences_featured_cards?.card3?.description}s
+          </p>
         </div>
       </div>
 
@@ -131,15 +146,24 @@ const PageTemplate = ({ params }: PageProp) => {
 
         {/* Highlights Section */}
         <div className="flex-1">
-          <div>
-            <h2 className="text-2xl font-semibold mb-4">Highlights</h2>
-            <ul className="list-disc list-inside text-gray-600 space-y-2">
-              <li>Exclusive boat tour to scenic islands</li>
-              <li>A hike to volcanic craters</li>
-              <li>Relaxing dip in natural hot springs</li>
-            </ul>
+          <div className="pt-8">
+            <h2 className="text-2xl font-semibold mb-4">What it&apos;s included</h2>
+            {/* <ul className="list-disc list-inside text-gray-600 space-y-2">
+              <li>₹3000 per person for 1-2 people</li>
+              <li>₹2800 per person for 3-4 people</li>
+              <li>₹2500 per person for groups of 5 or more</li>
+            </ul> */}
+            <div
+              dangerouslySetInnerHTML={{ __html: singleExperience?.acf?.whats_included || '' }}
+            ></div>
           </div>
 
+          <div className="pt-8">
+            <h2 className="text-2xl font-semibold mb-4">What it&apos;s not included</h2>
+            <div
+              dangerouslySetInnerHTML={{ __html: singleExperience?.acf?.whats_not_included || '' }}
+            ></div>
+          </div>
           <div className="pt-8">
             <h2 className="text-2xl font-semibold mb-4">What it&apos;s worth</h2>
             <ul className="list-disc list-inside text-gray-600 space-y-2">
@@ -148,29 +172,35 @@ const PageTemplate = ({ params }: PageProp) => {
               <li>₹2500 per person for groups of 5 or more</li>
             </ul>
           </div>
-          <div className="pt-8">
-            <h2 className="text-2xl font-semibold mb-4">Experience Highlight</h2>
-            <Carousel>
-              <CarouselContent>
-                {singleExperience?.acf?.highlight_images &&
-                  Object.entries(singleExperience.acf.highlight_images).map(
-                    ([key, img]: [string, any], index: number) => (
-                      <CarouselItem className="md:basis-1/3" key={key}>
-                        <div className="overflow-hidden rounded-lg shadow">
-                          <Image
-                            src={img}
-                            alt={img.alt || `Highlight ${index + 1}`}
-                            width={400}
-                            height={300}
-                            className="w-full h-52 object-cover"
-                          />
-                        </div>
-                      </CarouselItem>
-                    )
-                  )}
-              </CarouselContent>
-            </Carousel>
-          </div>
+          {singleExperience?.acf?.highlight_images &&
+            typeof singleExperience.acf.highlight_images === 'object' &&
+            Object.keys(singleExperience.acf.highlight_images).length > 0 && (
+              <div className="pt-8">
+                <h2 className="text-2xl font-semibold mb-4">Experience Highlights</h2>
+                <Carousel>
+                  <CarouselContent>
+                    {Object.entries(singleExperience.acf.highlight_images)
+                      .filter(([_, img]) => typeof img === 'string' && img.trim() !== '')
+                      .map(([key, img], index) => {
+                        const src = img as string; // ✅ Type assertion here
+                        return (
+                          <CarouselItem className="md:basis-1/3" key={key}>
+                            <div className="overflow-hidden rounded-lg shadow">
+                              <Image
+                                src={src}
+                                alt={`Highlight ${index + 1}`}
+                                width={400}
+                                height={300}
+                                className="w-full h-52 object-cover"
+                              />
+                            </div>
+                          </CarouselItem>
+                        );
+                      })}
+                  </CarouselContent>
+                </Carousel>
+              </div>
+            )}
         </div>
       </div>
     </div>

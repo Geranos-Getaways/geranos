@@ -71,34 +71,36 @@ const Page = () => {
       </section>
 
       {/* ========== OFFERINGS CAROUSEL SECTION ========== */}
-      <section className="px-4 sm:px-6 lg:px-8">
-        <div className="mb-6 max-w-7xl mx-auto text-center sm:text-left">
-          <h2 className="text-2xl sm:text-3xl font-semibold mb-1">Weekend Getaways</h2>
-          <p className="text-sm sm:text-base text-gray-600">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          </p>
-        </div>
-
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
-            {experiences.map((item, index) => (
-              <Link
-                key={index}
-                href={`/destination/${item?.acf?.destination_of_itenary}/itenary/${item?.slug}`}
-              >
-                <EventCards
-                  title={item?.title?.rendered}
-                  destination={item?.acf?.destination?.post_title}
-                  days={item?.acf?.days}
-                  nights={item?.acf?.nights}
-                  price={item?.acf?.starting_price}
-                  featuredImage={String(item?.acf?.thumbnail)}
-                />
-              </Link>
-            ))}
+      {experiences.length > 0 && (
+        <section className="px-4 sm:px-6 lg:px-8">
+          <div className="mb-6 max-w-7xl mx-auto text-center sm:text-left">
+            <h2 className="text-2xl sm:text-3xl font-semibold mb-1">Weekend Getaways</h2>
+            <p className="text-sm sm:text-base text-gray-600">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </p>
           </div>
-        </div>
-      </section>
+
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">
+              {experiences.map((item, index) => (
+                <Link
+                  key={index}
+                  href={`/destination/${item?.acf?.destination?.post_title}/itinerary/${item?.slug}`}
+                >
+                  <EventCards
+                    title={item?.title?.rendered}
+                    destination={item?.acf?.destination?.post_title}
+                    days={item?.acf?.days}
+                    nights={item?.acf?.nights}
+                    price={item?.acf?.starting_price}
+                    featuredImage={String(item?.acf?.thumbnail)}
+                  />
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 };

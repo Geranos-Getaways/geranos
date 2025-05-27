@@ -18,25 +18,24 @@ interface Prop {
 
 const ExperiencesCards = ({ state }: Prop) => {
   const [itineraries, setItineraries] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchItineraries = async () => {
       try {
-        setLoading(true);
         const res = await fetch(
           `https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?destination_of_itenary=${state}`
         );
         const data = await res.json();
 
-        if (data) {
-          const filtered = data.filter((item: any) => item?.acf?.offerings === 'Experiences');
-          //fetch featured image
-
+        if (data && Array.isArray(data)) {
+          const filtered = data.filter(
+            (item: any) => item?.acf?.offerings?.toLowerCase() === 'experiences'
+          );
           setItineraries(filtered);
         }
       } catch (error) {
-        console.error('Something went wrong while fetching Itineraries');
+        console.error('Something went wrong while fetching Itineraries', error);
       } finally {
         setLoading(false);
       }
@@ -46,33 +45,37 @@ const ExperiencesCards = ({ state }: Prop) => {
   }, [state]);
 
   return (
-    <div className="py-12 px-2 md:px-16">
-      <h2 className="text-3xl font-bold mb-2">Most Propular</h2>
-      <p className="text-gray-500 mb-8">
-        These are not included in tour packages, these are seperated add-ons
-      </p>
+    <>
+      {!loading && itineraries.length > 0 && (
+        <div className="py-12 px-2 md:px-16">
+          <h2 className="text-3xl font-bold mb-2">Most Popular</h2>
+          <p className="text-gray-500 mb-8">
+            These are not included in tour packages — these are separate add-ons.
+          </p>
 
-      <Carousel>
-        <CarouselContent>
-          {itineraries.map((item, index) => (
-            <CarouselItem className=" md:basis-1/2 lg:basis-1/5" key={index}>
-              <Link href={`/destination/${state}/experience/${item?.slug}`}>
-                <EventCards
-                  title={item?.title?.rendered}
-                  destination={item?.acf?.destination_of_itenary}
-                  days={item?.acf?.days}
-                  nights={item?.acf?.nights}
-                  price={item?.acf?.starting_price}
-                  featuredImage={item?.acf?.thumbnail}
-                />
-              </Link>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
-    </div>
+          <Carousel>
+            <CarouselContent>
+              {itineraries.map((item) => (
+                <CarouselItem className="md:basis-1/2 lg:basis-1/5" key={item?.slug}>
+                  <Link href={`/destination/${state}/experience/${item?.slug}`}>
+                    <EventCards
+                      title={item?.title?.rendered}
+                      destination={item?.acf?.destination_of_itenary}
+                      days={item?.acf?.days}
+                      nights={item?.acf?.nights}
+                      price={item?.acf?.starting_price}
+                      featuredImage={item?.acf?.thumbnail || defaultImage}
+                    />
+                  </Link>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
+      )}
+    </>
   );
 };
 

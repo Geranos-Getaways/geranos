@@ -42,6 +42,7 @@ const Page = () => {
 
         if (data) {
           const filtered = data.filter((item: any) => item.acf?.offerings === 'Experiences');
+          console.log('FILTERED: ', filtered);
 
           setExperiences(filtered);
         }
@@ -74,22 +75,23 @@ const Page = () => {
       </section>
 
       {/* ================== OFFERINGS CAROUSEL SECTION ================== */}
-      <section className="px-4 md:px-6">
-        <div className="mb-6 max-w-7xl mx-auto">
-          <h2 className="text-3xl font-semibold mb-1">Most Popular - Experiences</h2>
-          <p className="text-md text-gray-600">
-            These are not included in tour packages, these are seperated add-ons.
-          </p>
-        </div>
+      {experiences.length > 0 && (
+        <section className="px-4 md:px-6">
+          <div className="mb-6 max-w-7xl mx-auto">
+            <h2 className="text-3xl font-semibold mb-1">Most Popular - Experiences</h2>
+            <p className="text-md text-gray-600">
+              These are not included in tour packages, these are seperated add-ons.
+            </p>
+          </div>
 
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {experiences.map((item, index) => (
-              <Link
-                key={index}
-                href={`/destination/${item?.acf?.destination_of_itenary}/experience/${item?.slug}`}
-              >
-                {/* <EventCards
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {experiences.map((item, index) => (
+                <Link
+                  key={index}
+                  href={`/destination/${item?.acf?.destination?.post_title}/experience/${item?.slug}`}
+                >
+                  {/* <EventCards
                   title={item?.title?.rendered}
                   destination={item?.acf?.destination_of_itenary}
                   days={item?.acf?.days}
@@ -97,19 +99,20 @@ const Page = () => {
                   price={item?.acf?.starting_price}
                   featuredImage={String(item?.acf?.thumbnail)} // <- this fixes the error
                 /> */}
-                <ExperiencesCards
-                  title={item?.title?.rendered}
-                  destination={item?.acf?.destination?.post_title}
-                  days={item?.acf?.days}
-                  nights={item?.acf?.nights}
-                  price={item?.acf?.starting_price}
-                  featuredImage={String(item?.acf?.thumbnail)} // <- this fixes the error
-                />
-              </Link>
-            ))}
+                  <ExperiencesCards
+                    title={item?.title?.rendered}
+                    destination={item?.acf?.destination?.post_title}
+                    days={item?.acf?.days}
+                    nights={item?.acf?.nights}
+                    price={item?.acf?.starting_price}
+                    featuredImage={String(item?.acf?.thumbnail)} // <- this fixes the error
+                  />
+                </Link>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 };

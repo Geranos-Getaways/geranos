@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Carousel,
   CarouselContent,
@@ -8,18 +8,17 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import EventCards from '@/components/custom/EventCards';
 import defaultImage from '../../../../../public/global/Punjab.webp';
 
 interface Props {
-  state: string; // 👈 Define the single prop here
+  state: string;
 }
 
 const WeekendGetaways = ({ state }: Props) => {
   const [itineraries, setItineraries] = useState<any[]>([]);
-  const [loading, setLoading] = useState([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchItenaries = async () => {
@@ -30,15 +29,15 @@ const WeekendGetaways = ({ state }: Props) => {
         const data = await res.json();
 
         if (data && Array.isArray(data)) {
-          // ✅ Filter for 'Experiences' offering
           const filtered = data.filter(
-            (item) => item?.acf?.offerings?.toLowerCase() === 'experiences'
+            (item) => item?.acf?.offerings?.toLowerCase() === 'weekend getaways'
           );
-
           setItineraries(filtered);
         }
       } catch (error) {
         console.error('Something went wrong while fetching Itineraries', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -47,33 +46,33 @@ const WeekendGetaways = ({ state }: Props) => {
 
   return (
     <>
-      {/* Tour Packages */}
-      <div className="py-12 px-2 md:px-16">
-        <h2 className="text-3xl font-bold mb-2">Weekend Getaways</h2>
-        <p className="text-gray-500 mb-8">Current favourites for travellers like you</p>
+      {!loading && itineraries.length > 0 && (
+        <div className="py-12 px-2 md:px-16">
+          <h2 className="text-3xl font-bold mb-2">Weekend Getaways</h2>
+          <p className="text-gray-500 mb-8">Current favourites for travellers like you</p>
 
-        <Carousel>
-          <CarouselContent>
-            {itineraries &&
-              itineraries.map((item, index) => (
-                <CarouselItem className=" md:basis-1/2 lg:basis-1/5" key={item?.title?.rendered}>
-                  <Link href={`/destination/${state}/itenary/${item?.slug}`}>
+          <Carousel>
+            <CarouselContent>
+              {itineraries.map((item) => (
+                <CarouselItem className="md:basis-1/2 lg:basis-1/5" key={item?.title?.rendered}>
+                  <Link href={`/destination/${state}/itinerary/${item?.slug}`}>
                     <EventCards
                       title={item?.title?.rendered}
                       destination={item?.acf?.destination?.post_title}
                       days={item?.acf?.days}
                       nights={item?.acf?.nights}
                       price={item?.acf?.starting_price}
-                      featuredImage={item?.acf?.thumbnail}
+                      featuredImage={item?.acf?.thumbnail || defaultImage}
                     />
                   </Link>
                 </CarouselItem>
               ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
-      </div>
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
+        </div>
+      )}
     </>
   );
 };
