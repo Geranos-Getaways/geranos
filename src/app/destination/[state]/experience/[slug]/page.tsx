@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
+import styles from './styles.module.css';
 
 interface PageProp {
   params: {
@@ -23,6 +24,7 @@ interface ExperienceData {
     whats_included: string;
     whats_not_included: string;
     experiences_featured_cards: any;
+    timings: string;
   };
 }
 
@@ -128,7 +130,7 @@ const PageTemplate = ({ params }: PageProp) => {
           </h4>
           <p className="text-purple-600 mt-2">
             {' '}
-            {singleExperience?.acf?.experiences_featured_cards?.card3?.description}s
+            {singleExperience?.acf?.experiences_featured_cards?.card3?.description}
           </p>
         </div>
       </div>
@@ -148,13 +150,10 @@ const PageTemplate = ({ params }: PageProp) => {
         <div className="flex-1">
           <div className="pt-8">
             <h2 className="text-2xl font-semibold mb-4">What it&apos;s included</h2>
-            {/* <ul className="list-disc list-inside text-gray-600 space-y-2">
-              <li>₹3000 per person for 1-2 people</li>
-              <li>₹2800 per person for 3-4 people</li>
-              <li>₹2500 per person for groups of 5 or more</li>
-            </ul> */}
+
             <div
               dangerouslySetInnerHTML={{ __html: singleExperience?.acf?.whats_included || '' }}
+              className={`${styles.listStyle}`}
             ></div>
           </div>
 
@@ -162,15 +161,12 @@ const PageTemplate = ({ params }: PageProp) => {
             <h2 className="text-2xl font-semibold mb-4">What it&apos;s not included</h2>
             <div
               dangerouslySetInnerHTML={{ __html: singleExperience?.acf?.whats_not_included || '' }}
+              className={`${styles.listStyle}`}
             ></div>
           </div>
           <div className="pt-8">
-            <h2 className="text-2xl font-semibold mb-4">What it&apos;s worth</h2>
-            <ul className="list-disc list-inside text-gray-600 space-y-2">
-              <li>₹3000 per person for 1-2 people</li>
-              <li>₹2800 per person for 3-4 people</li>
-              <li>₹2500 per person for groups of 5 or more</li>
-            </ul>
+            <h2 className="text-2xl font-semibold mb-4">Timings</h2>
+            <p>{singleExperience?.acf?.timings}</p>
           </div>
           {singleExperience?.acf?.highlight_images &&
             typeof singleExperience.acf.highlight_images === 'object' &&

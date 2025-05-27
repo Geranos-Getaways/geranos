@@ -12,6 +12,7 @@ interface ExperienceItem {
     rendered: string;
   };
   acf: {
+    ratings: string;
     offerings: string;
     starting_price: string;
     thumbnail: string | number;
@@ -102,6 +103,7 @@ const Page = () => {
                   <ExperiencesCards
                     title={item?.title?.rendered}
                     destination={item?.acf?.destination?.post_title}
+                    ratings={item?.acf?.ratings}
                     days={item?.acf?.days}
                     nights={item?.acf?.nights}
                     price={item?.acf?.starting_price}

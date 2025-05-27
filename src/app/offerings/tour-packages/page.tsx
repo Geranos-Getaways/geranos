@@ -12,6 +12,7 @@ interface TourPackage {
     rendered: string;
   };
   acf: {
+    ratings: string;
     offerings: string;
     starting_price: string;
     thumbnail: string | number;
@@ -95,6 +96,7 @@ const Page = () => {
                     days={item?.acf?.days}
                     nights={item?.acf?.nights}
                     price={item?.acf?.starting_price}
+                    ratings={item?.acf?.ratings}
                     featuredImage={String(item?.acf?.thumbnail)} // <- this fixes the error
                   />
                 </Link>

@@ -71,7 +71,7 @@ const Layout = ({ children, params }: LayoutProps) => {
               </li>
               <li>
                 <Link
-                  href={`/destination/${state}/itenaries`}
+                  href={`/destination/${state}/itineraries`}
                   className="hover:text-blue-600 hover:text-xl transition-all duration-200"
                 >
                   Itenaries

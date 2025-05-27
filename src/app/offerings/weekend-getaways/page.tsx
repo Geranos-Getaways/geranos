@@ -11,6 +11,7 @@ interface ExperienceItem {
     rendered: string;
   };
   acf: {
+    ratings: string;
     offerings: string;
     starting_price: string;
     thumbnail: string | number;
@@ -92,6 +93,7 @@ const Page = () => {
                     destination={item?.acf?.destination?.post_title}
                     days={item?.acf?.days}
                     nights={item?.acf?.nights}
+                    ratings={item?.acf?.ratings}
                     price={item?.acf?.starting_price}
                     featuredImage={String(item?.acf?.thumbnail)}
                   />

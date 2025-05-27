@@ -64,6 +64,7 @@ const ExperiencesCards = ({ state }: Prop) => {
                       days={item?.acf?.days}
                       nights={item?.acf?.nights}
                       price={item?.acf?.starting_price}
+                      ratings={item?.acf?.ratings}
                       featuredImage={item?.acf?.thumbnail || defaultImage}
                     />
                   </Link>
