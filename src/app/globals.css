@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  font-family: 'Inter', sans-serif;
+}
+
 /* BROPELLA */
 @font-face {
   font-family: 'Bropella';
@@ -134,6 +138,7 @@ li {
   }
   body {
     @apply bg-background text-foreground;
+    background-color: #f9fafb;
   }
 }
 

@@ -21,6 +21,7 @@ const EventCards = ({
   featuredImage,
   ratings,
 }: CardProps) => {
+  const eventTitle = title.trim();
   // console.log("Featured Image", featuredImg)
   return (
     <div
@@ -40,7 +41,7 @@ const EventCards = ({
         <div className="flex justify-between items-end">
           <div className="w-[65%]">
             <p className="text-xs uppercase opacity-80 tracking-wide truncate">{destination}</p>
-            <h5 className="text-sm font-medium leading-tight line-clamp-2">{title}</h5>
+            <h5 className="text-sm font-medium leading-tight line-clamp-2">{eventTitle}</h5>
           </div>
           <div className="text-right">
             <p className="italic text-xs">Starts @</p>

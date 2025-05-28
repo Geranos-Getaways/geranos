@@ -41,7 +41,7 @@ const Page = ({ params }: { params: { state: string } }) => {
   return (
     <div className="page-wrapper min-h-[70vh] ">
       <div>
-        <section className="bg-white py-0">
+        <section className="py-0">
           <div className="text-center max-w-2xl mx-auto p-4 md:px-4 md:my-20">
             <h2 className="text-3xl font-semibold mb-4 font-tangerine">
               {destination?.acf?.short_description?.title}
@@ -54,7 +54,7 @@ const Page = ({ params }: { params: { state: string } }) => {
 
         <div className="mt-10 px-4 max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
           {/* Card 1 */}
-          <div className="bg-white rounded-2xl shadow-md p-5 text-center hover:shadow-lg transition">
+          <div className="rounded-2xl shadow-md p-5 text-center hover:shadow-lg transition">
             <div className="flex justify-center mb-3">
               <div className="bg-blue-100 text-blue-500 p-2 rounded-full text-xl">⛱️</div>
             </div>
@@ -63,7 +63,7 @@ const Page = ({ params }: { params: { state: string } }) => {
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white rounded-2xl shadow-md p-5 text-center hover:shadow-lg transition">
+          <div className="rounded-2xl shadow-md p-5 text-center hover:shadow-lg transition">
             <div className="flex justify-center mb-3">
               <div className="bg-purple-100 text-purple-500 p-2 rounded-full text-xl">📅</div>
             </div>
@@ -72,7 +72,7 @@ const Page = ({ params }: { params: { state: string } }) => {
           </div>
 
           {/* Card 3 */}
-          <div className="bg-white rounded-2xl shadow-md p-5 text-center hover:shadow-lg transition">
+          <div className="rounded-2xl shadow-md p-5 text-center hover:shadow-lg transition">
             <div className="flex justify-center mb-3">
               <div className="bg-orange-100 text-orange-500 p-2 rounded-full text-xl">🗣️</div>
             </div>
@@ -81,7 +81,7 @@ const Page = ({ params }: { params: { state: string } }) => {
           </div>
 
           {/* Card 4 */}
-          <div className="bg-white rounded-2xl shadow-md p-5 text-center hover:shadow-lg transition">
+          <div className="rounded-2xl shadow-md p-5 text-center hover:shadow-lg transition">
             <div className="flex justify-center mb-3">
               <div className="bg-green-100 text-green-500 p-2 rounded-full text-xl">💰</div>
             </div>
@@ -90,7 +90,7 @@ const Page = ({ params }: { params: { state: string } }) => {
           </div>
         </div>
 
-        <section className="bg-white py-10">
+        <section className=" py-10">
           <div className="text-center max-w-2xl mx-auto px-4">
             <button
               className="mt-6 inline-flex items-center px-6 py-2 border border-blue-600 text-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition"
@@ -106,7 +106,7 @@ const Page = ({ params }: { params: { state: string } }) => {
             <div className="relative mt-20 px-4 md:px-10 py-10 w-full max-w-screen-xl mx-auto">
               <div className="flex flex-col md:flex-row gap-8">
                 {/* Sidebar Navigation */}
-                <aside className="w-full md:w-1/4 h-fit sticky top-24 md:top-28 bg-white">
+                <aside className="w-full md:w-1/4 h-fit sticky top-24 md:top-28 ">
                   <ul
                     className={`flex md:block overflow-x-auto md:overflow-visible whitespace-nowrap md:whitespace-normal 
             text-gray-700 font-medium text-sm sm:text-base gap-2 md:gap-0 pb-2 md:pb-0 border-b md:border-none ${styles.explore}`}
@@ -138,7 +138,7 @@ const Page = ({ params }: { params: { state: string } }) => {
 
                 {/* Main Content Sections */}
                 <main
-                  className={`w-full md:w-3/4 bg-white p-6 rounded-xl shadow-sm h-[700px] overflow-y-scroll scroll-smooth scroll-pt-28 custom-scrollbar ${styles.explore}`}
+                  className={`w-full md:w-3/4  p-6 rounded-xl shadow-sm h-[700px] overflow-y-scroll scroll-smooth scroll-pt-28 custom-scrollbar ${styles.explore}`}
                 >
                   <section id="ataglance">
                     <AtAGlance />

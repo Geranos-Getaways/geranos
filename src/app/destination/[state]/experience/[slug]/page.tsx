@@ -25,6 +25,8 @@ interface ExperienceData {
     whats_not_included: string;
     experiences_featured_cards: any;
     timings: string;
+    starting_price: string;
+    experience_highlight_points: string;
   };
 }
 
@@ -62,9 +64,9 @@ const PageTemplate = ({ params }: PageProp) => {
   }
 
   return (
-    <div className="min-h-screen bg-white text-gray-800">
+    <div className="min-h-screen  text-gray-800">
       {/* Hero Section */}
-      <div className="relative w-full h-[450px]">
+      <div className="relative w-full h-[250px] md:h-[450px]">
         {singleExperience.acf?.thumbnail ? (
           <Image
             src={singleExperience.acf.thumbnail}
@@ -149,6 +151,15 @@ const PageTemplate = ({ params }: PageProp) => {
         {/* Highlights Section */}
         <div className="flex-1">
           <div className="pt-8">
+            <h2 className="text-xl font-regular mb-2">Pricing</h2>
+            <p className="font-semibold text-2xl">₹{singleExperience?.acf?.starting_price}</p>
+          </div>
+          <div className="pt-8">
+            <h2 className="text-xl font-regular mb-2">Pricing</h2>
+            <p className="font-semibold text-2xl">{singleExperience?.acf?.timings}</p>
+          </div>
+
+          <div className="pt-8">
             <h2 className="text-2xl font-semibold mb-4">What it&apos;s included</h2>
 
             <div
@@ -164,9 +175,15 @@ const PageTemplate = ({ params }: PageProp) => {
               className={`${styles.listStyle}`}
             ></div>
           </div>
+
           <div className="pt-8">
-            <h2 className="text-2xl font-semibold mb-4">Timings</h2>
-            <p>{singleExperience?.acf?.timings}</p>
+            <h2 className="text-2xl font-semibold mb-4">Highlight Point</h2>
+            <div
+              className="experience-highlight-points"
+              dangerouslySetInnerHTML={{
+                __html: singleExperience?.acf?.experience_highlight_points || '',
+              }}
+            ></div>
           </div>
           {singleExperience?.acf?.highlight_images &&
             typeof singleExperience.acf.highlight_images === 'object' &&
