@@ -75,6 +75,12 @@ li {
   font-family: 'lato';
 }
 
+p,
+ul,
+li {
+  color: #6d6d68;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

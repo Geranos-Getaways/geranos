@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 import styles from './styles.module.css';
+import { Clock, Clock10 } from 'lucide-react';
 
 interface PageProp {
   params: {
@@ -151,12 +152,19 @@ const PageTemplate = ({ params }: PageProp) => {
         {/* Highlights Section */}
         <div className="flex-1">
           <div className="pt-8">
-            <h2 className="text-xl font-regular mb-2">Pricing</h2>
-            <p className="font-semibold text-2xl">₹{singleExperience?.acf?.starting_price}</p>
-          </div>
-          <div className="pt-8">
-            <h2 className="text-xl font-regular mb-2">Pricing</h2>
-            <p className="font-semibold text-2xl">{singleExperience?.acf?.timings}</p>
+            {/* <h2 className="text-xl font-regular mb-2">Pricing</h2> */}
+            <p className="">
+              <span className="font-semibold text-2xl ">
+                {' '}
+                ₹{singleExperience?.acf?.starting_price}{' '}
+              </span>{' '}
+              per traveller
+            </p>
+
+            <div className="flex gap-4 mt-2 items-center">
+              <Clock10 />
+              <p className="">{singleExperience?.acf?.timings}</p>
+            </div>
           </div>
 
           <div className="pt-8">
