@@ -22,7 +22,7 @@ const SingleItenarySidebar = ({ destination, price }: ComponentProp) => {
 
   return (
     <div
-      className="w-full lg:w-1/3 md:sticky top-28 self-start h-fit bg-white shadow-lg rounded-xl p-6"
+      className="w-full md:sticky top-28 self-start h-fit bg-white shadow-lg rounded-xl p-6"
       style={{ bottom: '60px' }}
     >
       <h3 className="text-md font-semibold mb-2">Customise your trip</h3>

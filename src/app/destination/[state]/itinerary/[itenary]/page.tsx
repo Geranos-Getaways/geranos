@@ -15,55 +15,27 @@ import Link from 'next/link';
 import DayWise from './DayWise';
 import Highlights from './Highlights';
 import Accomodations from './Accomodation';
+import { useItinerary } from './ItineraryContext';
 
 const Page = () => {
-  const [itenaryInfo, setItenaryInfo] = useState<any>(null);
-  const [featuredImgUrl, setFeaturedImgUrl] = useState<any>(null);
-  const [dayWise, setDayWise] = useState<any>(null);
-  const [loading, setLoading] = useState(false);
-
-  const { itenary } = useParams();
+  const { itineraryInfo, loading } = useItinerary();
 
   // Default fallback data
-  const defaultTitle = 'Greece - Sizzling Days in Greece';
-  const defaultDestination = 'Greece';
+  const defaultTitle = 'India';
+  const defaultDestination = 'India';
 
   const defaultPrice = '107,090';
   const defaultPlaces = ['Athens, 3D', 'Mikonos, 2D', 'Santorini Airport, 3D'];
   const defaultInclusions = ['Sightseeing', 'Breakfast', 'Airport Transfer'];
 
-  useEffect(() => {
-    const fetchSingleItenary = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(
-          `https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?slug=${itenary}`
-        );
-        const data = await res.json();
-
-        if (data) {
-          setItenaryInfo(data[0]);
-          console.log(data[0]?.acf);
-        }
-      } catch (error) {
-        console.error('Error fetching itinerary:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchSingleItenary();
-  }, [itenary]);
-
-  const acf = itenaryInfo?.acf;
-
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className=" bg-gray-50">
       {loading ? (
         <div>Loading</div>
       ) : (
         <>
-          <div className="w-full h-[290px] md:h-[450px] relative">
+          {/* Hero Section */}
+          {/* <div className="w-full h-[290px] md:h-[450px] relative">
             <Image
               src={acf?.thumbnail || '/fallback.jpg'}
               alt="Hero"
@@ -71,9 +43,8 @@ const Page = () => {
               objectFit="cover"
               className="w-full h-full"
             />
-          </div>
-
-          <div className="flex justify-center mt-[-25px] z-10 relative">
+          </div> */}
+          {/* <div className="flex justify-center mt-[-25px] z-10 relative">
             <div className="bg-white rounded-full shadow-lg px-6 py-2 flex gap-6 text-sm">
               <button className="font-medium text-blue-600">Highlights</button>
               <Link href="#dayWise">
@@ -83,19 +54,18 @@ const Page = () => {
                 <button className="text-gray-500">Accommodations</button>
               </Link>
             </div>
-          </div>
-
+          </div> */}
           <div className="max-w-7xl mx-auto px-4 mt-12 flex flex-col lg:flex-row gap-12">
             <div className="flex-1">
               <div className="text-sm text-blue-400 mb-2">
-                {acf?.destination_of_itenary || defaultDestination}
+                {itineraryInfo?.acf?.destination_of_itenary || defaultDestination}
               </div>
               <h1 className="text-3xl font-bold mb-4">
-                {itenaryInfo?.title?.rendered || defaultTitle}
+                {itineraryInfo?.title?.rendered || defaultTitle}
               </h1>
               <div
                 className="text-gray-600 mb-6"
-                dangerouslySetInnerHTML={{ __html: acf?.full_description || '' }}
+                dangerouslySetInnerHTML={{ __html: itineraryInfo?.acf?.full_description || '' }}
               ></div>
 
               {/* <div className="mb-4">
@@ -106,14 +76,15 @@ const Page = () => {
               <div className="mb-4">
                 <p className="text-sm font-medium mb-1 text-gray-700">Duration</p>
                 <p className="text-gray-600">
-                  {acf?.days || '8'} Days - {acf?.nights || '7'} Nights
+                  {itineraryInfo?.acf?.days || '8'} Days - {itineraryInfo?.acf?.nights || '7'}{' '}
+                  Nights
                 </p>
               </div>
 
               <div className="mb-8">
                 <p className="text-sm font-medium mb-1 text-gray-700">Pricing</p>
                 <p className="text-gray-800 font-semibold text-xl">
-                  ₹{acf?.starting_price || defaultPrice}{' '}
+                  ₹{itineraryInfo?.acf?.starting_price || defaultPrice}{' '}
                   <span className="text-sm font-light">per person</span>
                 </p>
               </div>
@@ -154,14 +125,16 @@ const Page = () => {
                 </div>
               </div> */}
 
-              <div className="mt-8">
+              <div className="mt-2">
                 <div>
                   <Accordion type="single" collapsible className="w-full">
                     <AccordionItem value="item-1">
                       <AccordionTrigger>Whats Included</AccordionTrigger>
                       <AccordionContent>
                         <div
-                          dangerouslySetInnerHTML={{ __html: acf?.whats_included || '' }}
+                          dangerouslySetInnerHTML={{
+                            __html: itineraryInfo?.acf?.whats_included || '',
+                          }}
                           className={`${styles.richList}`}
                         />
                       </AccordionContent>
@@ -170,7 +143,9 @@ const Page = () => {
                       <AccordionTrigger>Whats Not Included</AccordionTrigger>
                       <AccordionContent>
                         <div
-                          dangerouslySetInnerHTML={{ __html: acf?.whats_not_included || '' }}
+                          dangerouslySetInnerHTML={{
+                            __html: itineraryInfo?.acf?.whats_not_included || '',
+                          }}
                           className={`${styles.richList}`}
                         />
                       </AccordionContent>
@@ -179,17 +154,17 @@ const Page = () => {
                 </div>
               </div>
 
-              <Highlights highlights={acf?.highlight_images} />
+              {/* <Highlights highlights={acf?.highlight_images} />
 
               <DayWise daywise={acf?.daywise} />
 
-              <Accomodations accomodations={acf?.accomodations} />
+              <Accomodations accomodations={acf?.accomodations} /> */}
             </div>
 
-            <SingleItenarySidebar
+            {/* <SingleItenarySidebar
               destination={acf?.destination_of_itenary}
               price={acf?.starting_price}
-            />
+            /> */}
           </div>
         </>
       )}

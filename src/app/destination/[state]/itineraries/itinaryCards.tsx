@@ -23,14 +23,13 @@ const ItinaryCards = ({ state }: Props) => {
   useEffect(() => {
     const fetchItenaries = async () => {
       try {
-        const res = await fetch(
-          `https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?destination_of_itenary=${state}`
-        );
+        const res = await fetch(`https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries`);
         const data = await res.json();
-
         if (data && Array.isArray(data)) {
           const filtered = data.filter(
-            (item) => item?.acf?.offerings?.toLowerCase() === 'tour packages'
+            (item) =>
+              item?.acf?.offerings?.toLowerCase() === 'tour packages' &&
+              item?.acf?.destination?.post_title?.toLowerCase() === state
           );
 
           console.log('Itineraries:', filtered);

@@ -64,7 +64,7 @@ const Layout = ({ children, params }: LayoutProps) => {
               <li>
                 <Link
                   href={`/destination/${state}/explore/culture-and-history`}
-                  className="hover:text-blue-600 hover:text-xl transition-all duration-200"
+                  className="hover:text-blue-600 hover:text-xl transition-all duration-200 text-black"
                 >
                   Explore
                 </Link>
@@ -72,15 +72,15 @@ const Layout = ({ children, params }: LayoutProps) => {
               <li>
                 <Link
                   href={`/destination/${state}/itineraries`}
-                  className="hover:text-blue-600 hover:text-xl transition-all duration-200"
+                  className="hover:text-blue-600 hover:text-xl transition-all duration-200 text-black"
                 >
-                  I tineraries
+                  Itineraries
                 </Link>
               </li>
               <li>
                 <Link
                   href={`/destination/${state}/experiences`}
-                  className="hover:text-blue-600 hover:text-xl transition-all duration-200"
+                  className="hover:text-blue-600 hover:text-xl transition-all duration-200 text-black"
                 >
                   Experiences
                 </Link>

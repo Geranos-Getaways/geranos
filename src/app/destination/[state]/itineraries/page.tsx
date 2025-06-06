@@ -9,7 +9,7 @@ interface PageProp {
 }
 const Page = ({ params }: PageProp) => {
   return (
-    <div>
+    <div className="">
       <ItinaryCards state={params.state} />
       <WeekendGetaways state={params.state} />
     </div>
