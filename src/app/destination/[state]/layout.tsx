@@ -50,7 +50,7 @@ const Layout = ({ children, params }: LayoutProps) => {
             <h1 className="text-4xl md:text-8xl font-bold drop-shadow-lg capitalize font-bropella">
               {state}
             </h1>
-            <p className="text-lg md:text-2xl mt-2 drop-shadow-md">
+            <p className="text-lg md:text-2xl mt-2 drop-shadow-md text-white">
               {destination?.acf?.sub_heading}
             </p>
           </div>
@@ -74,7 +74,7 @@ const Layout = ({ children, params }: LayoutProps) => {
                   href={`/destination/${state}/itineraries`}
                   className="hover:text-blue-600 hover:text-xl transition-all duration-200"
                 >
-                  Itenaries
+                  I tineraries
                 </Link>
               </li>
               <li>

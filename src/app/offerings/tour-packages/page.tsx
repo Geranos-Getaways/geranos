@@ -66,7 +66,7 @@ const Page = () => {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold font-bropella leading-tight">
             Tour Packages
           </h1>
-          <p className="text-base sm:text-lg max-w-2xl">
+          <p className="text-base sm:text-lg max-w-2xl text-white">
             Discover cultural experiences, spiritual sites, local food, and vibrant festivals —
             everything that makes Punjab unforgettable.
           </p>

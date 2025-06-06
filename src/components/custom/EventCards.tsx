@@ -40,11 +40,13 @@ const EventCards = ({
       <div className="absolute bottom-4 w-full text-white px-4">
         <div className="flex justify-between items-end">
           <div className="w-[65%]">
-            <p className="text-xs uppercase opacity-80 tracking-wide truncate">{destination}</p>
+            <p className="text-xs uppercase opacity-80 tracking-wide truncate text-white">
+              {destination}
+            </p>
             <h5 className="text-sm font-medium leading-tight line-clamp-2">{eventTitle}</h5>
           </div>
           <div className="text-right">
-            <p className="italic text-xs">Starts @</p>
+            <p className="italic text-xs text-white">Starts @</p>
             <p className="text-sm font-semibold text-[#f3c30c]">₹ {price || 'Not Mentioned'}/-</p>
           </div>
         </div>
