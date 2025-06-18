@@ -25,36 +25,48 @@ export default async function CarouselDemo() {
     {
       id: 1,
       title: {
-        rendered: 'Ravi Mehra',
+        rendered: 'Sebestian Kuruvilla',
       },
       acf: {
         designation: 'Travel Enthusiast',
         testimonial:
-          'Geranos Getaways curated a truly unforgettable experience for me. Every detail was thoughtfully planned and the cultural immersion was exceptional. Highly recommended!',
+          'I recently had the pleasure of exploring Punjab, and it was truly a transformative experience. Every detail was meticulously planned, and the personalized itinerary made me feel like I was getting an insider’s view of the region. The farm stay was a highlight—immersing myself in village life was humbling and enriching. I can’t recommend Geranos Getaways enough for anyone looking to experience India in a responsible, authentic, and unforgettable way.',
         personimage: '/global/Punjab.webp',
       },
     },
     {
       id: 2,
       title: {
-        rendered: 'Aarushi Verma',
+        rendered: 'Matthew Roelandts',
       },
       acf: {
         designation: 'Lifestyle Blogger',
         testimonial:
-          'What stood out was the balance between luxury and authenticity. From local food trails to serene farm stays, the trip was magical. Can’t wait to book again!',
+          'Our experience for the Baisakhi festival at Falcon Green Farm was extraordinary. The team ensured that our family had a truly immersive experience, celebrating Baisakhi in the heart of Punjab. The festival celebrations were vibrant and unforgettable, with traditional music, dance, and a feast that captured the season’s spirit. My family and I felt so welcomed and cared for the personal touch.',
         personimage: '/global/Punjab.webp',
       },
     },
     {
       id: 3,
       title: {
-        rendered: 'Dr. Karan Gill',
+        rendered: 'Priyakshi Saikia',
       },
       acf: {
         designation: 'Professor of Anthropology',
         testimonial:
-          'As someone who studies culture, I was deeply impressed by the thoughtful itineraries. Geranos is doing incredible work preserving and promoting heritage tourism.',
+          'We recently booked an offshore honeymoon package with Geranos Getaways, including flights, and we couldn’t be happier with the service. They handled everything from airline bookings to customized itineraries, making the entire process seamless and stress-free. The attention to detail was incredible—everything was planned around our preferences, and we even had the option to choose eco-friendly travel options. Whether you’re looking for a quick getaway or a more extensive exploration of India and beyond, Geranos Getaways ensures that every aspect of your journey is taken care of with the utmost care and professionalism. Highly recommend!',
+        personimage: '/global/Punjab.webp',
+      },
+    },
+    {
+      id: 4,
+      title: {
+        rendered: 'Sashank',
+      },
+      acf: {
+        designation: 'Professor of Anthropology',
+        testimonial:
+          'My trip to the Andaman and Nicobar Islands for scuba diving certification was flawlessly organized by Geranos Getaways. They cared for everything, from air tickets to accommodations, and even suggested excellent sightseeing options. The accommodations were comfortable and conveniently located near the dive sites. Thanks to their expertise, we enjoyed a seamless and unforgettable experience.',
         personimage: '/global/Punjab.webp',
       },
     },
