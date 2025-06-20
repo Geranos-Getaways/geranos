@@ -1,7 +1,7 @@
 import TextAndImage from '@/components/custom/Content/TextAndImage/TextAndImage';
 import DestinationsCards from '@/components/custom/Content/DestinationsCards/DestinationsCards';
 import Testimonials from '@/components/custom/Testimonials/Testimonials';
-import HeroSlickSlider from '@/components/custom/Global/HeroHomeSlider/HeroHomeSlider';
+import HeroSlickSlider from '@/components/custom/Global/HeroHomeSlider/SimpleSlider';
 
 export default async function Home() {
   const req = await fetch(
@@ -22,6 +22,20 @@ export default async function Home() {
       console.error('❌ Error parsing JSON:', err.message);
     }
   }
+
+  const slideData = [
+    {
+      imageUrl: 'https://your-cdn.com/punjab.jpg',
+      heading: 'Punjab',
+      subheading: 'The Land of Timeless Heritage',
+    },
+    {
+      imageUrl: 'https://your-cdn.com/kerala.jpg',
+      heading: 'Kerala',
+      subheading: "God's Own Country",
+    },
+    // Add more slides as needed
+  ];
 
   return (
     <main className="flex min-h-screen flex-col">

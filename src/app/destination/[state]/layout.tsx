@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import CustomizeTrip from '../CustomizeTrip';
 import { DestinationContext } from './DestinationContext';
-import HeroHomeSlickSlide from '@/components/custom/Global/HeroHomeSlider/HeroHomeSlide';
+import HeroHomeSlickSlide from '@/components/custom/Global/HeroHomeSlider/HeroHomeSlickSlide';
 
 interface LayoutProps {
   children: React.ReactNode;

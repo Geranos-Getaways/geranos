@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   Accordion,
   AccordionContent,
@@ -8,7 +7,11 @@ import {
 } from '@/components/ui/accordion';
 import Link from 'next/link';
 
-const MobileNavigation = () => {
+interface MobileNavigationProps {
+  onNavigate: () => void;
+}
+
+const MobileNavigation: React.FC<MobileNavigationProps> = ({ onNavigate }) => {
   return (
     <div className="text-left">
       <Accordion type="single" collapsible className="w-full">
@@ -17,10 +20,14 @@ const MobileNavigation = () => {
           <AccordionContent>
             <ul className="text-xl flex flex-col gap-4 text-[#2F6BEB] font-semibold font-EduVICWANTBeginner">
               <li>
-                <Link href="/destination/punjab">Punjab</Link>
+                <Link href="/destination/punjab" onClick={onNavigate}>
+                  Punjab
+                </Link>
               </li>
               <li>
-                <Link href="/destination/uttarakhand">Uttarakhand</Link>
+                <Link href="/destination/uttarakhand" onClick={onNavigate}>
+                  Uttarakhand
+                </Link>
               </li>
             </ul>
           </AccordionContent>
@@ -30,25 +37,35 @@ const MobileNavigation = () => {
           <AccordionContent>
             <ul className="text-xl flex flex-col gap-4 text-[#2F6BEB] font-semibold font-EduVICWANTBeginner">
               <li>
-                <Link href="/offerings/tour-packages">Tour Packages</Link>
+                <Link href="/offerings/tour-packages" onClick={onNavigate}>
+                  Tour Packages
+                </Link>
               </li>
               <li>
-                <Link href="/offerings/weekend-getaways">Weekend Getaways</Link>
+                <Link href="/offerings/weekend-getaways" onClick={onNavigate}>
+                  Weekend Getaways
+                </Link>
               </li>
               <li>
-                <Link href="/offerings/experiences">Experiences</Link>
+                <Link href="/offerings/experiences" onClick={onNavigate}>
+                  Experiences
+                </Link>
               </li>
             </ul>
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-3">
-          <p className="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180">
-            <a href="/blog">Blogs</a>
+          <p className="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline">
+            <a href="/blog" onClick={onNavigate}>
+              Blogs
+            </a>
           </p>
         </AccordionItem>
         <AccordionItem value="item-4">
-          <p className="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180">
-            <a href="/contact">Contact</a>
+          <p className="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline">
+            <a href="/contact" onClick={onNavigate}>
+              Contact
+            </a>
           </p>
         </AccordionItem>
       </Accordion>
