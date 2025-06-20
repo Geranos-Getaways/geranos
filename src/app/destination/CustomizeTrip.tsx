@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import CustomTripModal from './CustomTripModal';
+import CustomTripModal from './[state]/CustomTripModal';
 
 const CustomizeTrip = () => {
   return (

@@ -1,3 +1,4 @@
+'use client';
 import { useState } from 'react';
 import Image from 'next/image';
 
@@ -7,19 +8,51 @@ const CustomTripModal = () => {
     name: '',
     email: '',
     phone: '',
-    people: '',
-    city: '',
+    startDate: '',
+    endDate: '',
+    tocity: '',
+    adult: '0',
+    child: '0',
+    message: '',
   });
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(form);
-    // Add form submission logic here (e.g., API or email trigger)
-    setIsOpen(false);
+
+    try {
+      const res = await fetch('/api/submit-trip', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      });
+
+      if (res.ok) {
+        alert('Your request has been submitted successfully!');
+        setForm({
+          name: '',
+          email: '',
+          phone: '',
+          startDate: '',
+          endDate: '',
+          tocity: '',
+          adult: '0',
+          child: '0',
+          message: '',
+        });
+        setIsOpen(false);
+      } else {
+        alert('Submission failed. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('An error occurred. Please try again.');
+    }
   };
 
   return (
@@ -37,7 +70,7 @@ const CustomTripModal = () => {
             {/* Left Image */}
             <div className="relative w-full md:w-1/2 h-56 md:h-auto">
               <Image
-                src="/global/Punjab.webp" // your image path
+                src="/global/Punjab.webp"
                 alt="Custom Trip"
                 layout="fill"
                 objectFit="cover"
@@ -64,8 +97,8 @@ const CustomTripModal = () => {
                   placeholder="Full Name"
                   value={form.name}
                   onChange={handleChange}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-200"
                   required
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3"
                 />
                 <input
                   type="email"
@@ -73,8 +106,8 @@ const CustomTripModal = () => {
                   placeholder="Email Address"
                   value={form.email}
                   onChange={handleChange}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-200"
                   required
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3"
                 />
                 <input
                   type="tel"
@@ -82,26 +115,61 @@ const CustomTripModal = () => {
                   placeholder="Phone Number"
                   value={form.phone}
                   onChange={handleChange}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-200"
                   required
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3"
                 />
                 <input
-                  type="number"
-                  name="people"
-                  placeholder="No. of People"
-                  value={form.people}
+                  type="date"
+                  name="startDate"
+                  value={form.startDate}
                   onChange={handleChange}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-200"
                   required
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3"
+                />
+                <input
+                  type="date"
+                  name="endDate"
+                  value={form.endDate}
+                  onChange={handleChange}
+                  required
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3"
                 />
                 <input
                   type="text"
-                  name="city"
-                  placeholder="Your City"
-                  value={form.city}
+                  name="tocity"
+                  placeholder="Destination City"
+                  value={form.tocity}
                   onChange={handleChange}
-                  className="w-full border border-gray-200 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-200"
                   required
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3"
+                />
+                <input
+                  type="number"
+                  name="adult"
+                  placeholder="Number of Adults"
+                  value={form.adult}
+                  onChange={handleChange}
+                  min="0"
+                  required
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3"
+                />
+                <input
+                  type="number"
+                  name="child"
+                  placeholder="Number of Children"
+                  value={form.child}
+                  onChange={handleChange}
+                  min="0"
+                  required
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3"
+                />
+                <textarea
+                  name="message"
+                  placeholder="Enter package name, destination, places..."
+                  value={form.message}
+                  onChange={handleChange}
+                  rows={4}
+                  className="w-full border border-gray-200 rounded-lg px-4 py-3"
                 />
 
                 <button

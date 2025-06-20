@@ -18,13 +18,13 @@ import {
 const locations: { title: string; href: string; description: string }[] = [
   {
     title: 'Punjab',
-    href: '',
+    href: 'href: "/destination/punjab',
     // href: "/destination/punjab",
     description: '',
   },
   {
     title: 'Uttarakhand',
-    href: '',
+    href: '/destination/uttarakhand',
     // href: '/destination/uttarakhand',
     description: '',
   },
@@ -33,19 +33,19 @@ const locations: { title: string; href: string; description: string }[] = [
 const experiences: { title: string; href: string; description: string }[] = [
   {
     title: 'Tour Packages',
-    href: '',
+    href: '/offerings/tour-packages',
     // href: '/offerings/tour-packages',
     description: '',
   },
   {
     title: 'Weekend Getaways',
-    href: '',
+    href: '/offerings/weekend-getaways',
     // href: '/offerings/weekend-getaways',
     description: '',
   },
   {
     title: 'Experiences',
-    href: '',
+    href: '/offerings/experiences',
     // href: '/offerings/experiences',
     description: '',
   },
