@@ -2,9 +2,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import CustomizeTrip from '../CustomizeTrip';
+
 import { DestinationContext } from './DestinationContext';
 import HeroHomeSlickSlide from '@/components/custom/Global/HeroHomeSlider/HeroHomeSlickSlide';
+import CustomizeTrip from '@/components/custom/CustomizeTrip/CustomizeTrip';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -94,6 +95,7 @@ const Layout = ({ children, params }: LayoutProps) => {
 
         <div className="cta-footer my-4">
           <CustomizeTrip />
+          Component Modal
         </div>
       </div>
     </DestinationContext.Provider>

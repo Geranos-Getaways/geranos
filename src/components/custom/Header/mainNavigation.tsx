@@ -18,7 +18,7 @@ import {
 const locations: { title: string; href: string; description: string }[] = [
   {
     title: 'Punjab',
-    href: 'href: "/destination/punjab',
+    href: '/destination/punjab',
     // href: "/destination/punjab",
     description: '',
   },
