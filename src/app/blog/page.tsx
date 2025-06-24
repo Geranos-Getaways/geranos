@@ -14,8 +14,16 @@ const BlogPage = async () => {
 
   return (
     <div>
-      <div className="bg-cover bg-[url('/global/banners/blog-main-final.jpg')] bg-center min-h-[320px] md:min-h-[420px] xl:min-h-[420px] bg-slate-50">
-        <div className="bg-[rgba(0,0,0,0.3)] flex aling-middle justify-center gap-4 md:gap-6 text-center flex-col min-h-[320px] md:min-h-[420px] xl:min-h-[420px] px-4 py-12">
+      {/* Banner Section */}
+      <div
+        className="bg-center min-h-[320px] md:min-h-[420px] xl:min-h-[420px] bg-slate-50"
+        style={{
+          backgroundImage: "url('/global/banners/blog-main-final.jpg')",
+          backgroundSize: 'cover',
+          backgroundRepeat: 'no-repeat',
+        }}
+      >
+        <div className="bg-[rgba(0,0,0,0.3)] flex items-center justify-center gap-4 md:gap-6 text-center flex-col min-h-[320px] md:min-h-[420px] xl:min-h-[420px] px-4 py-12">
           <h1 className="text-white text-[2.5rem] sm:text-5xl md:text-6xl xl:text-6xl font-EduVICWANTBeginner mb-[-8px] md:mb-[0px]">
             Our Blogs
           </h1>
@@ -29,21 +37,23 @@ const BlogPage = async () => {
         </div>
       </div>
 
-      <div>
-        {blogs &&
-          blogs.map((blog: any) => {
-            return (
-              <div key={blog.id}>
-                <SingleBlogCard
-                  title={blog.title.rendered}
-                  date={blog.date}
-                  excerpt={blog.excerpt.rendered}
-                  slug={blog.slug}
-                  image={blog.acf.mobile_featured_image}
-                />
-              </div>
-            );
-          })}
+      {/* Blog Cards Section */}
+      <div id="cstmContId" className="container mx-auto px-4 py-12">
+        {blogs?.length > 0 ? (
+          blogs.map((blog: any) => (
+            <div key={blog.id} className="mb-8">
+              <SingleBlogCard
+                title={blog.title?.rendered || 'Untitled'}
+                date={blog.date}
+                excerpt={blog.excerpt?.rendered || ''}
+                slug={blog.slug}
+                image={blog.acf?.mobile_featured_image ?? ''}
+              />
+            </div>
+          ))
+        ) : (
+          <p className="text-center text-gray-600">No blog posts found.</p>
+        )}
       </div>
     </div>
   );
