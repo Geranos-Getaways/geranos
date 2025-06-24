@@ -61,13 +61,13 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({ onNavigate }) => {
             </a>
           </p>
         </AccordionItem>
-        <AccordionItem value="item-4">
+        {/* <AccordionItem value="item-4">
           <p className="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline">
             <a href="/contact" onClick={onNavigate}>
               Contact
             </a>
           </p>
-        </AccordionItem>
+        </AccordionItem> */}
       </Accordion>
     </div>
   );

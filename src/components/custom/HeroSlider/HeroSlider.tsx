@@ -31,7 +31,7 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ slides, title, subheading }) =>
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
+    <div className="relative w-full h-screen overflow-hidden" id="destination-hero-section">
       <div
         className="absolute inset-0 bg-cover bg-center transition-all duration-1000"
         style={{ backgroundImage: `url(${slideImages[currentIndex]})` }}

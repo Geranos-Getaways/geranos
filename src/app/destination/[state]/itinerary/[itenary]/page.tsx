@@ -16,6 +16,7 @@ import DayWise from './DayWise';
 import Highlights from './Highlights';
 import Accomodations from './Accomodation';
 import { useItinerary } from './ItineraryContext';
+import { formatPrice } from '@/utils/formatPrice';
 
 const Page = () => {
   const { itineraryInfo, loading } = useItinerary();
@@ -82,9 +83,9 @@ const Page = () => {
               </div>
 
               <div className="mb-8">
-                <p className="text-sm font-medium mb-1 text-gray-700">Pricing</p>
+                <p className="text-sm font-medium mb-1 text-gray-700">Starting price</p>
                 <p className="text-gray-800 font-semibold text-xl">
-                  ₹{itineraryInfo?.acf?.starting_price || defaultPrice}{' '}
+                  ₹{formatPrice(itineraryInfo?.acf?.starting_price || defaultPrice)}{' '}
                   <span className="text-sm font-light">per person</span>
                 </p>
               </div>

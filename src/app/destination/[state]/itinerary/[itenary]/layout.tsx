@@ -56,7 +56,7 @@ const LayoutStructure = ({ children, params }: LayoutStructureProps) => {
         <div className="w-full lg:flex-1">{children}</div>
 
         {/* Sidebar */}
-        <div className="w-full lg:w-[320px] shrink-0">
+        <div className="w-full lg:w-[320px] shrink-0 hidden lg:block">
           <SingleItenarySidebar
             destination={acf?.destination?.post_title}
             price={acf?.starting_price}

@@ -1,3 +1,4 @@
+import { formatPrice } from '@/utils/formatPrice';
 import { Star, StarIcon, StarsIcon } from 'lucide-react';
 import { fetchExternalImage } from 'next/dist/server/image-optimizer';
 import React from 'react';
@@ -47,7 +48,9 @@ const EventCards = ({
           </div>
           <div className="text-right">
             <p className="italic text-xs text-white">Starts @</p>
-            <p className="text-sm font-semibold text-[#f3c30c]">₹ {price || 'Not Mentioned'}/-</p>
+            <p className="text-sm font-semibold text-[#f3c30c]">
+              ₹ {formatPrice(price || 'Not Mentioned')}/-
+            </p>
           </div>
         </div>
       </div>

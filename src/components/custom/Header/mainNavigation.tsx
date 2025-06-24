@@ -94,13 +94,13 @@ export default function NavigationMenuDemo() {
             </Link>
           </NavigationMenuItem>
 
-          <NavigationMenuItem>
+          {/* <NavigationMenuItem>
             <Link href="/contact" legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 <p className="uppercase tracking-wider">Contact us</p>
               </NavigationMenuLink>
             </Link>
-          </NavigationMenuItem>
+          </NavigationMenuItem> */}
         </NavigationMenuList>
       </NavigationMenu>
     </>

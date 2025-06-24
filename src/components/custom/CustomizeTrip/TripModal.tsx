@@ -45,7 +45,7 @@ const TripModal = () => {
           message: '',
         });
         setIsOpen(false);
-        setShowThankYou(true); // 🎉 Show thank-you popup
+        setShowThankYou(true);
       } else {
         alert('Submission failed. Please try again.');
       }
@@ -66,9 +66,10 @@ const TripModal = () => {
 
       {/* Main Form Modal */}
       {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-center justify-center px-5">
-          <div className="bg-white rounded-2xl overflow-hidden shadow-xl w-full max-w-4xl flex flex-col md:flex-row">
-            <div className="relative w-full md:w-1/2 h-56 md:h-auto">
+        <div className="fixed inset-0 bg-black bg-opacity-40 z-50 flex items-start md:items-center justify-center px-2 py-6 overflow-y-auto">
+          <div className="bg-white rounded-2xl shadow-xl w-full max-w-2xl md:max-w-4xl flex flex-col md:flex-row overflow-hidden">
+            {/* Left Image */}
+            <div className="relative w-full md:w-1/2 h-40 md:h-auto">
               <Image
                 src="/global/Punjab.webp"
                 alt="Custom Trip"
@@ -77,7 +78,9 @@ const TripModal = () => {
                 className="md:rounded-l-2xl"
               />
             </div>
-            <div className="w-full md:w-1/2 p-8 space-y-6">
+
+            {/* Right Form */}
+            <div className="w-full md:w-1/2 p-6 md:p-8 space-y-6">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-semibold">Customize Your Trip</h2>
                 <button
@@ -87,8 +90,8 @@ const TripModal = () => {
                   ×
                 </button>
               </div>
+
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Input fields */}
                 <input
                   type="text"
                   name="name"

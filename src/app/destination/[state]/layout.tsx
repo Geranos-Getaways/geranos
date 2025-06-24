@@ -45,7 +45,6 @@ const Layout = ({ children, params }: LayoutProps) => {
 
         <div className="cta-footer my-4">
           <CustomizeTrip />
-          Component Modal
         </div>
       </div>
     </DestinationContext.Provider>
