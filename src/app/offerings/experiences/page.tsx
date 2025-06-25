@@ -5,59 +5,61 @@ import Image from 'next/image';
 import defaultImage from '../../../../public/global/Experiences.jpg';
 import Link from 'next/link';
 import ExperiencesCards from './ExperiencesCards';
+import ItineraryCard from './ItineraryCard';
 
 interface ExperienceItem {
   id: number;
-  title: {
-    rendered: string;
-  };
+  slug: string;
+  type: 'itinerary' | 'offering'; // 👈 Added type flag
+  title: { rendered: string };
   acf: {
     ratings: string;
     offerings: string;
     starting_price: string;
     thumbnail: string | number;
     destination_of_itenary: string;
-    destination: {
-      post_title: string;
-    };
+    destination: any;
     days: string;
     nights: string;
   };
-  featuredImage: string;
-  featuredImg: string;
-  thumbnail: string | number;
-
-  slug: string;
 }
 
 const Page = () => {
-  const [experiences, setExperiences] = useState<ExperienceItem[]>([]);
+  const [combinedList, setCombinedList] = useState<ExperienceItem[]>([]);
 
   useEffect(() => {
-    const fetchOfferings = async () => {
+    const fetchData = async () => {
       try {
-        const res = await fetch(
-          'https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?per_page=50'
-        );
-        const data = await res.json();
+        const [itineraryRes, offeringsRes] = await Promise.all([
+          fetch('https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?per_page=50'),
+          fetch('https://dashboard.geranosgetaways.com/wp-json/wp/v2/offerings?per_page=50'),
+        ]);
 
-        if (data) {
-          const filtered = data.filter((item: any) => item.acf?.offerings === 'Experiences');
-          console.log('FILTERED: ', filtered);
+        const itinerariesRaw = await itineraryRes.json();
+        const offeringsRaw = await offeringsRes.json();
 
-          setExperiences(filtered);
-        }
+        const itineraries = itinerariesRaw
+          .filter((item: any) => item?.acf?.offerings === 'Experiences')
+          .map((item: any) => ({ ...item, type: 'itinerary' }));
+
+        const offerings = offeringsRaw
+          .filter((item: any) => item?.acf?.offerings === 'Experiences')
+          .map((item: any) => ({ ...item, type: 'offering' }));
+
+        console.log('Offerings: ', offerings);
+
+        setCombinedList([...offerings, ...itineraries]);
       } catch (error) {
-        console.error('Something went wrong while fetching offers', error);
+        console.error('Error fetching experiences:', error);
       }
     };
 
-    fetchOfferings();
+    fetchData();
   }, []);
 
   return (
     <div className="flex flex-col gap-16">
-      {/* ========== HERO SECTION ========== */}
+      {/* HERO SECTION */}
       <section
         className="w-full bg-cover bg-center text-white py-20 px-4 sm:px-6 md:px-8 flex justify-center items-center min-h-[50vh]"
         style={{
@@ -75,43 +77,47 @@ const Page = () => {
         </div>
       </section>
 
-      {/* ================== OFFERINGS CAROUSEL SECTION ================== */}
-      {experiences.length > 0 && (
+      {/* COMBINED CARDS GRID */}
+      {combinedList.length > 0 && (
         <section className="px-4 md:px-6">
           <div className="mb-6 max-w-7xl mx-auto">
-            <h2 className="text-3xl font-semibold mb-1">Most Popular - Experiences</h2>
-            <p className="text-md text-gray-600">
-              These are not included in tour packages, these are seperated add-ons.
-            </p>
+            <h2 className="text-3xl font-semibold mb-1">Experiences & Add-ons</h2>
+            <p className="text-md text-gray-600">Combine itineraries and offerings seamlessly</p>
           </div>
 
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {experiences.map((item, index) => (
-                <Link
-                  key={index}
-                  href={`/destination/${item?.acf?.destination?.post_title}/experience/${item?.slug}`}
-                >
-                  {/* <EventCards
-                  title={item?.title?.rendered}
-                  destination={item?.acf?.destination_of_itenary}
-                  days={item?.acf?.days}
-                  nights={item?.acf?.nights}
-                  price={item?.acf?.starting_price}
-                  featuredImage={String(item?.acf?.thumbnail)} // <- this fixes the error
-                /> */}
-                  <ExperiencesCards
-                    title={item?.title?.rendered}
-                    destination={item?.acf?.destination?.post_title}
-                    ratings={item?.acf?.ratings}
-                    days={item?.acf?.days}
-                    nights={item?.acf?.nights}
-                    price={item?.acf?.starting_price}
-                    featuredImage={String(item?.acf?.thumbnail)} // <- this fixes the error
-                  />
+          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {combinedList.map((item) => {
+              const isItinerary = item.type === 'itinerary';
+              const href = isItinerary
+                ? `/destination/${item.acf.destination?.post_title}/experience/${item.slug}`
+                : `/offerings/experience/${item.slug}`;
+              // `/offerings/itinerary/${item.slug}`
+              return (
+                <Link key={item.id} href={href}>
+                  {isItinerary ? (
+                    <ExperiencesCards
+                      title={item.title.rendered}
+                      destination={item.acf.destination?.post_title}
+                      ratings={item.acf.ratings}
+                      days={item.acf.days}
+                      nights={item.acf.nights}
+                      price={item.acf.starting_price}
+                      featuredImage={String(item.acf.thumbnail)}
+                    />
+                  ) : (
+                    <ItineraryCard
+                      title={item.title.rendered}
+                      destination={item.acf.destination}
+                      ratings={item.acf.ratings}
+                      days={item.acf.days}
+                      nights={item.acf.nights}
+                      price={item.acf.starting_price}
+                      featuredImage={String(item.acf.thumbnail)}
+                    />
+                  )}
                 </Link>
-              ))}
-            </div>
+              );
+            })}
           </div>
         </section>
       )}

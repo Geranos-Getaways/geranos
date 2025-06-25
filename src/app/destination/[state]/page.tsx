@@ -106,7 +106,7 @@ const Page = ({ params }: { params: { state: string } }) => {
             <div className="relative mt-20 px-4 md:px-10 py-10 w-full max-w-screen-xl mx-auto">
               <div className="flex flex-col md:flex-row gap-8">
                 {/* Sidebar Navigation */}
-                <aside className="w-full md:w-1/4 h-fit sticky top-24 md:top-28 ">
+                <aside className="w-full md:w-1/4 h-fit sticky top-[93px] md:top-28 bg-white  ">
                   <ul
                     className={`flex md:block overflow-x-auto md:overflow-visible whitespace-nowrap md:whitespace-normal 
             text-gray-700 font-medium text-sm sm:text-base gap-2 md:gap-0 pb-2 md:pb-0 border-b md:border-none ${styles.explore}`}

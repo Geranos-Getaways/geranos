@@ -1,25 +1,96 @@
-'use client';
-
-import { FaWhatsapp } from 'react-icons/fa';
+import React from 'react';
+import Image from 'next/image';
+import { Separator } from '@/components/ui/separator';
 import Link from 'next/link';
+import BottomAccordionDesktop from './BottomAccordionDesktop';
+import BottomAccordionMobile from './BottomAccordionMobile';
+import LastBarLeft from './LastBarLeft';
+import LastBarRight from './LastBarRight';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
-const WhatsAppButton = () => {
-  const phoneNumber = '918837562970'; // WhatsApp number with country code (91 for India)
-  const message = encodeURIComponent(
-    'Hi Geranos Getaways! I have a travel requirement, Please assist me'
-  );
-
+const Footer = () => {
   return (
-    <Link
-      href={`https://wa.me/${phoneNumber}?text=${message}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Chat on WhatsApp"
-      className="fixed bottom-5 right-5 z-50 w-14 h-14 bg-green-500 rounded-full shadow-lg flex items-center justify-center hover:bg-green-600 transition duration-300"
-    >
-      <FaWhatsapp className="text-white w-7 h-7" />
-    </Link>
+    <>
+      <WhatsAppButton />
+      <div className="mt-10 md:mt-20 sm:bg-white border-b-[10px] border-[#246BEB] w-full  min-h-[90px] flex flex-col justify-around px-4 sm:px-6 pt-12 pb-8 sm:pt-12 sm:pb-4">
+        <div className="max-w-[1800px] w-full mx-auto">
+          <div className="flex flex-col sm:flex-row justify-between mb-12">
+            <div className="mt-2 flex mb-4 sm:mb-0 justify-center sm:justify-start">
+              <div>
+                <p className="text-md mt-2 text-slate-600">© Geranos Getaways 2024</p>
+              </div>
+            </div>
+
+            <p className="flex gap-2 justify-center sm:justify-end">
+              {/*
+              <Link href="https://x.com" className="flex flex-col align-middle justify-center">
+                <Image src="/global/social/x.png" className="rounded max-w-[32px] sm:max-w-[40px]" alt="Social" width="40" height="40"/>
+              </Link>
+              */}
+
+              <Link
+                target="_blank"
+                href="https://www.facebook.com/Geranosgetaways"
+                className="flex flex-col align-middle justify-center"
+              >
+                <Image
+                  src="/global/social/facebook.png"
+                  className="rounded max-w-[32px] sm:max-w-[40px]"
+                  alt="Social"
+                  width="40"
+                  height="40"
+                />
+              </Link>
+              <Link
+                target="_blank"
+                href="https://www.instagram.com/geranosgetaways/"
+                className="flex flex-col align-middle justify-center"
+              >
+                <Image
+                  src="/global/social/instagram.png"
+                  className="rounded max-w-[32px] sm:max-w-[40px]"
+                  alt="Social"
+                  width="40"
+                  height="40"
+                />
+              </Link>
+              <Link
+                target="_blank"
+                href="https://www.linkedin.com/company/79039053/admin/dashboard/"
+                className="flex flex-col align-middle justify-center"
+              >
+                <Image
+                  src="/global/social/linkedin.png"
+                  className="rounded max-w-[32px] sm:max-w-[40px]"
+                  alt="Social"
+                  width="40"
+                  height="40"
+                />
+              </Link>
+            </p>
+          </div>
+          <Separator className="mb-12" />
+
+          <div className="hidden xl:flex flex-row justify-between mb-12">
+            <BottomAccordionDesktop />
+          </div>
+          <div className="flex xl:hidden flex-row justify-between mb-12 ">
+            <BottomAccordionMobile />
+          </div>
+
+          <Separator className="mb-12" />
+
+          {/*
+        <div className="flex flex-col sm:flex-row align-middle justify-between">
+          <LastBarLeft/>
+          <LastBarRight/>
+
+        </div>
+        */}
+        </div>
+      </div>
+    </>
   );
 };
 
-export default WhatsAppButton;
+export default Footer;

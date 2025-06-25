@@ -17,45 +17,50 @@ interface TourPackage {
     starting_price: string;
     thumbnail: string | number;
     destination_of_itenary: string;
-    destination: {
-      post_title: string;
-    };
+    destination: any; // string or object
     nights: string;
     days: string;
   };
-  imageUrl: string;
   slug: string;
-  featuredImage: string;
+  type: 'itinerary' | 'offering';
 }
 
 const Page = () => {
   const [tourPackages, setTourPackages] = useState<TourPackage[]>([]);
 
   useEffect(() => {
-    const fetchOfferings = async () => {
+    const fetchTourPackages = async () => {
       try {
-        const res = await fetch(
-          'https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?per_page=50'
-        );
-        const data = await res.json();
+        const [itineraryRes, offeringsRes] = await Promise.all([
+          fetch('https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?per_page=50'),
+          fetch('https://dashboard.geranosgetaways.com/wp-json/wp/v2/offerings?per_page=50'),
+        ]);
 
-        if (data) {
-          const filtered = data.filter((item: any) => item.acf?.offerings === 'Tour Packages');
-          console.log('Filtered: ', filtered);
+        const [itineraryData, offeringsData] = await Promise.all([
+          itineraryRes.json(),
+          offeringsRes.json(),
+        ]);
 
-          setTourPackages(filtered);
-        }
+        const filteredItineraries = itineraryData
+          .filter((item: any) => item?.acf?.offerings === 'Tour Packages')
+          .map((item: any) => ({ ...item, type: 'itinerary' }));
+
+        const filteredOfferings = offeringsData
+          .filter((item: any) => item?.acf?.offerings === 'Tour Packages')
+          .map((item: any) => ({ ...item, type: 'offering' }));
+
+        setTourPackages([...filteredOfferings, ...filteredItineraries]);
       } catch (error) {
-        console.error('Something went wrong while fetching offers', error);
+        console.error('Something went wrong while fetching Tour Packages', error);
       }
     };
 
-    fetchOfferings();
+    fetchTourPackages();
   }, []);
 
   return (
     <div className="flex flex-col gap-16">
-      {/* ========== HERO SECTION ========== */}
+      {/* HERO SECTION */}
       <section
         className="w-full bg-cover bg-center text-white py-20 px-4 sm:px-6 md:px-8 flex justify-center items-center min-h-[50vh]"
         style={{
@@ -73,34 +78,43 @@ const Page = () => {
         </div>
       </section>
 
-      {/* ================== OFFERINGS CAROUSEL SECTION ================== */}
+      {/* TOUR PACKAGES GRID */}
       {tourPackages.length > 0 && (
         <section className="px-4 md:px-6">
           <div className="mb-6 max-w-7xl mx-auto">
             <h2 className="text-3xl font-semibold mb-1">Tour Packages</h2>
             <p className="text-md text-gray-600">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Choose from carefully curated packages that blend heritage, comfort, and culture.
             </p>
           </div>
 
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {tourPackages.map((item, index) => (
-                <Link
-                  key={index}
-                  href={`/destination/${item?.acf?.destination?.post_title}/itinerary/${item?.slug}`}
-                >
-                  <EventCards
-                    title={item?.title?.rendered}
-                    destination={item?.acf?.destination?.post_title}
-                    days={item?.acf?.days}
-                    nights={item?.acf?.nights}
-                    price={item?.acf?.starting_price}
-                    ratings={item?.acf?.ratings}
-                    featuredImage={String(item?.acf?.thumbnail)} // <- this fixes the error
-                  />
-                </Link>
-              ))}
+              {tourPackages.map((item) => {
+                const destination =
+                  typeof item.acf.destination === 'string'
+                    ? item.acf.destination
+                    : item.acf.destination?.post_title;
+
+                const href =
+                  item.type === 'itinerary'
+                    ? `/destination/${destination}/itinerary/${item.slug}`
+                    : `#`;
+                // /offerings/itinerary/${item.slug}
+                return (
+                  <Link key={item.id} href={href}>
+                    <EventCards
+                      title={item.title.rendered}
+                      destination={destination}
+                      days={item.acf.days}
+                      nights={item.acf.nights}
+                      price={item.acf.starting_price}
+                      ratings={item.acf.ratings}
+                      featuredImage={String(item.acf.thumbnail)}
+                    />
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>

@@ -33,7 +33,7 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({ onNavigate }) => {
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="item-2">
-          <AccordionTrigger>Experiences</AccordionTrigger>
+          <AccordionTrigger>Offerings</AccordionTrigger>
           <AccordionContent>
             <ul className="text-xl flex flex-col gap-4 text-[#2F6BEB] font-semibold font-EduVICWANTBeginner">
               <li>

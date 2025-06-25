@@ -11,7 +11,7 @@ interface CardProps {
   ratings: string;
 }
 
-const EventCards = ({
+const ItineraryCard = ({
   destination,
   title,
   price,
@@ -20,7 +20,7 @@ const EventCards = ({
   featuredImage,
   ratings,
 }: CardProps) => {
-  console.log('Itinerary Card sloas: ', destination);
+  console.log('Itinerary Card Destination: ', destination);
   return (
     <div
       className="h-[260px] w-full rounded-xl overflow-hidden relative bg-cover bg-center"
@@ -53,4 +53,4 @@ const EventCards = ({
   );
 };
 
-export default EventCards;
+export default ItineraryCard;

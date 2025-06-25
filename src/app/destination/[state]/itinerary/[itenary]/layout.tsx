@@ -71,9 +71,11 @@ const Layout = ({ children, params }: LayoutProps) => {
   useEffect(() => {
     const styleTag = document.createElement('style');
     styleTag.innerHTML = `
-      #destination-hero-section {
+      #destination-hero-section, #destination-stick-layout-options {
         display: none !important;
       }
+
+      
     `;
     document.head.appendChild(styleTag);
     return () => {

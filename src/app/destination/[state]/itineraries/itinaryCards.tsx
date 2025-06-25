@@ -48,7 +48,7 @@ const ItinaryCards = ({ state }: Props) => {
   return (
     <>
       {!loading && itineraries.length > 0 && (
-        <div className="py-12 px-2 md:px-16">
+        <div className="py-5 px-2 md:px-16">
           <h2 className="text-3xl font-bold mb-2">Tour Packages</h2>
           <p className="text-gray-500 mb-8">Current favourites for travellers like you</p>
 

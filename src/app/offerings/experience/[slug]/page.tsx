@@ -42,7 +42,7 @@ const PageTemplate = ({ params }: PageProp) => {
     const fetchExperience = async () => {
       try {
         const res = await fetch(
-          `https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?slug=${slug}`
+          `https://dashboard.geranosgetaways.com/wp-json/wp/v2/offerings?slug=${slug}`
         );
         const data = await res.json();
         if (data && data.length > 0) {

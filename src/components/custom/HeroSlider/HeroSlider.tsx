@@ -1,4 +1,3 @@
-// components/HeroSlider.tsx
 'use client';
 
 import React, { useState, useEffect } from 'react';
@@ -18,7 +17,7 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ slides, title, subheading }) =>
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % slideImages.length);
-    }, 5000); // Auto-play every 5 seconds
+    }, 5000);
     return () => clearInterval(interval);
   }, [slideImages.length]);
 
@@ -31,7 +30,10 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ slides, title, subheading }) =>
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden" id="destination-hero-section">
+    <div
+      className="relative w-full h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-[65vh] xl:h-[70vh] overflow-hidden"
+      id="destination-hero-section"
+    >
       <div
         className="absolute inset-0 bg-cover bg-center transition-all duration-1000"
         style={{ backgroundImage: `url(${slideImages[currentIndex]})` }}
@@ -40,13 +42,13 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ slides, title, subheading }) =>
       </div>
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
-        <h1 className="text-4xl md:text-8xl font-bold drop-shadow-lg capitalize font-bropella">
+        <h1 className="text-4xl md:text-6xl font-bold drop-shadow-lg capitalize font-bropella">
           {title}
         </h1>
-        <p className="text-lg md:text-2xl mt-2 drop-shadow-md text-white">{subheading}</p>
+        <p className="text-base md:text-xl mt-2 drop-shadow-md text-white">{subheading}</p>
       </div>
 
-      {/* Navigation Arrows */}
+      {/* Arrows */}
       <button
         onClick={goToPrevious}
         className="absolute left-5 top-1/2 transform -translate-y-1/2 text-white text-3xl z-20"
