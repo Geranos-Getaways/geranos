@@ -12,8 +12,12 @@ const Layout = ({ children }: LayoutProp) => {
   useEffect(() => {
     const styleTag = document.createElement('style');
     styleTag.innerHTML = `
-      #destination-hero-section {
+      #destination-hero-section, #destination-stick-layout-options {
         display: none !important;
+      }
+
+      #destination-state-layout{
+        padding:0px;
       }
     `;
     document.head.appendChild(styleTag);

@@ -62,6 +62,23 @@ body {
   background-clip: content-box;
 }
 
+/* Thin, styled horizontal scrollbar */
+.thin-scrollbar::-webkit-scrollbar {
+  height: 6px;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #a0aec0; /* neutral gray */
+  border-radius: 10px;
+}
+.thin-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.thin-scrollbar {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #a0aec0 transparent;
+}
+
 h1,
 h2,
 h3,

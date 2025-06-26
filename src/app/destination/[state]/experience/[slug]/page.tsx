@@ -47,6 +47,7 @@ const PageTemplate = ({ params }: PageProp) => {
         const data = await res.json();
         if (data && data.length > 0) {
           setSingleExperience(data[0]);
+          console.log('asdaosdn adsa ', data[0]);
         }
       } catch (error) {
         console.error('Fetch failed:', error);
@@ -109,17 +110,33 @@ const PageTemplate = ({ params }: PageProp) => {
       ) : null}
 
       {/* Info Cards */}
-      <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 py-8">
-        {['card1', 'card2', 'card3'].map((key, i) => {
-          const card = singleExperience?.acf?.experiences_featured_cards?.[key];
-          const colors = ['blue', 'orange', 'purple'];
-          return (
-            <div key={key} className={`bg-${colors[i]}-50 p-6 rounded-lg shadow`}>
-              <h4 className="font-semibold text-lg">{card?.title}</h4>
-              <p className={`text-${colors[i]}-600 mt-2`}>{card?.description}</p>
-            </div>
-          );
-        })}
+      {/* <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6 py-8"></div> */}
+      <div className="max-w-6xl mx-auto px-4 overflow-x-auto thin-scrollbar">
+        <div className="flex gap-4 snap-x snap-mandatory">
+          {['card1', 'card2', 'card3'].map((key, i) => {
+            const card = singleExperience?.acf?.experiences_featured_cards?.[key];
+            const colors = ['blue', 'orange', 'purple'];
+            return (
+              <div
+                key={key}
+                className={`
+            snap-start
+            flex-shrink-0
+            w-[85%] sm:w-[300px] md:w-1/3
+            bg-${colors[i]}-50 p-4 rounded-xl shadow
+          `}
+                style={{ backgroundColor: card?.card_background_color || '#f9fafb' }}
+              >
+                <h4 className="font-semibold text-base md:text-lg mb-2 break-words">
+                  {card?.title}
+                </h4>
+                <p className={`text-${colors[i]}-600 text-sm md:text-base break-words`}>
+                  {card?.description}
+                </p>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       {/* Main Content */}
@@ -169,15 +186,16 @@ const PageTemplate = ({ params }: PageProp) => {
           </div>
 
           {/* Highlight Points */}
-          <div className="pt-8">
-            <h2 className="text-2xl font-semibold mb-4">Highlight Points</h2>
-            <div
-              className="prose max-w-none"
-              dangerouslySetInnerHTML={{
-                __html: singleExperience?.acf?.experience_highlight_points || '',
-              }}
-            ></div>
-          </div>
+          {singleExperience?.acf?.experience_highlight_points && (
+            <div className="pt-8">
+              <div
+                className={`prose max-w-none ${styles.listStyle}`}
+                dangerouslySetInnerHTML={{
+                  __html: singleExperience.acf.experience_highlight_points,
+                }}
+              ></div>
+            </div>
+          )}
 
           {/* Highlight Images */}
           {singleExperience?.acf?.highlight_images &&

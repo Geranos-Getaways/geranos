@@ -64,7 +64,9 @@ const Layout = ({ children, params }: LayoutProps) => {
         </div>
 
         {/* PAGE CONTENT */}
-        <div className="py-2 px-4">{children}</div>
+        <div className="py-2 px-4" id="destination-state-layout">
+          {children}
+        </div>
 
         {/* CUSTOMIZE TRIP FORM */}
         <div className="cta-footer my-8">

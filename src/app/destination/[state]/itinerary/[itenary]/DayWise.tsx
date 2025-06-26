@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { useItinerary } from './ItineraryContext';
+import styles from './itenary.module.css';
 
 const DayWise = () => {
   const { itineraryInfo, loading } = useItinerary();
@@ -16,34 +17,38 @@ const DayWise = () => {
 
   return (
     <div className="my-10 md:mt-14 scroll-mt-28" id="dayWise">
-      <h4 className="font-semibold mb-4 text-2xl">Day Wise</h4>
+      <h4 className="font-semibold mb-6 text-2xl text-gray-800">Day Wise</h4>
 
       <div className="space-y-4">
         {validDays.map(([dayLabel, item]: any, index: number) => (
           <details
             key={dayLabel}
-            className="border rounded-lg overflow-hidden"
-            open={index === 0} // open first by default
+            className="bg-white border border-gray-200 rounded-2xl shadow-sm transition-all duration-300 group"
           >
-            <summary className="flex items-center justify-between cursor-pointer px-4 py-3 bg-gray-100 hover:bg-gray-200">
+            <summary className="flex items-center justify-between cursor-pointer px-5 py-4 hover:bg-gray-50 transition-colors duration-200">
               <div className="flex items-center gap-4">
-                <div className="w-20 h-20 rounded overflow-hidden shrink-0">
+                <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 ring-1 ring-gray-200">
                   <Image
                     src={item.image}
                     alt={item.title}
-                    width={80}
-                    height={80}
+                    width={64}
+                    height={64}
                     className="object-cover w-full h-full"
                   />
                 </div>
-                <p className="text-base font-medium">
-                  <span className="font-semibold mr-1">{dayLabel}:</span> {item.title}
-                </p>
+                <div>
+                  <p className="text-sm text-gray-500 font-medium">{dayLabel}</p>
+                  <p className="text-base font-semibold text-gray-800">{item.title}</p>
+                </div>
               </div>
+              <span className="text-gray-400 group-open:rotate-180 transition-transform">▼</span>
             </summary>
 
-            <div className="px-4 pb-4 pt-2 text-gray-700 text-sm leading-relaxed">
-              <div dangerouslySetInnerHTML={{ __html: item.description }} />
+            <div className="px-5 pb-5 pt-1 text-gray-700 text-sm leading-relaxed">
+              <div
+                className={styles.richList}
+                dangerouslySetInnerHTML={{ __html: item.description }}
+              />
             </div>
           </details>
         ))}

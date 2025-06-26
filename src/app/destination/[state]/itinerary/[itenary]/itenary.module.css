@@ -16,4 +16,14 @@
 .richList li {
   margin-bottom: 0.25rem;
   color: #333;
+  margin-bottom: 1rem;
+}
+
+.richList li strong {
+  font-weight: 600;
+  color: #111;
+}
+
+.richList li {
+  line-height: 1.6;
 }
