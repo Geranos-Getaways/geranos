@@ -17,11 +17,45 @@ import Highlights from './Highlights';
 import Accomodations from './Accomodation';
 import { useItinerary } from './ItineraryContext';
 import { formatPrice } from '@/utils/formatPrice';
+import useItineraryStore from './useCustomItineraryStore';
 
-const Page = () => {
-  const { itineraryInfo, loading } = useItinerary();
+interface PageProp {
+  params: {
+    itenary: string;
+  };
+}
 
-  console.log('Itinerary Information: ', itineraryInfo);
+const Page = ({ params }: PageProp) => {
+  // const { itineraryInfo, loading } = useItinerary();
+
+  // const [itineraryInfo, setItineraryInfo] = useState();
+  // const [isLoading, setIsLoading] = useState(false);
+
+  const { setItineraryInfo, setIsLoading, isLoading, itineraryInfo } = useItineraryStore();
+
+  const { itenary } = params;
+
+  useEffect(() => {
+    const fetchItinerary = async () => {
+      try {
+        setIsLoading(true);
+        const res = await fetch(
+          `https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?slug=${itenary}`
+        );
+
+        const data = await res.json();
+        setItineraryInfo(data[0]);
+        setIsLoading(false);
+      } catch (error) {
+        setIsLoading(false);
+        console.error('Unable to fetch Itinerary', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchItinerary();
+  }, [itenary]);
 
   // Default fallback data
   const defaultTitle = 'India';
@@ -33,7 +67,7 @@ const Page = () => {
 
   return (
     <div className=" bg-gray-50">
-      {loading ? (
+      {isLoading ? (
         <div>Loading</div>
       ) : (
         <>

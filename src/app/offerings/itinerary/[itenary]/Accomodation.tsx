@@ -4,14 +4,15 @@ import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carouse
 import Image from 'next/image';
 import React from 'react';
 import { useItinerary } from './ItineraryContext';
+import useItineraryStore from './useCustomItineraryStore';
 
 const FALLBACK_IMAGE = '/placeholder-hotel.jpg';
 
 const Accomodations = () => {
-  const { itineraryInfo, loading } = useItinerary();
+  const { itineraryInfo, isLoading } = useItineraryStore();
   const accomodations = itineraryInfo?.acf?.accomodations;
 
-  if (loading || !accomodations || Object.keys(accomodations).length === 0) return null;
+  if (isLoading || !accomodations || Object.keys(accomodations).length === 0) return null;
 
   const validAccomodations = Object.entries(accomodations).filter(
     ([_, data]: any) => typeof data.title === 'string' && data.title.trim() !== ''

@@ -23,7 +23,9 @@ const ItinaryCards = ({ state }: Props) => {
   useEffect(() => {
     const fetchItenaries = async () => {
       try {
-        const res = await fetch(`https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries`);
+        const res = await fetch(
+          `https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?destination_of_itenary=${state}`
+        );
         const data = await res.json();
         if (data && Array.isArray(data)) {
           const filtered = data.filter(

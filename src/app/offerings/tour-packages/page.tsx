@@ -99,7 +99,7 @@ const Page = () => {
                 const href =
                   item.type === 'itinerary'
                     ? `/destination/${destination}/itinerary/${item.slug}`
-                    : `#`;
+                    : `/offerings/itinerary/${item.slug}`;
                 // /offerings/itinerary/${item.slug}
                 return (
                   <Link key={item.id} href={href}>

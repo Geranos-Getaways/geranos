@@ -3,12 +3,13 @@
 import Image from 'next/image';
 import React from 'react';
 import { useItinerary } from './ItineraryContext';
+import useItineraryStore from './useCustomItineraryStore';
 
 const DayWise = () => {
-  const { itineraryInfo, loading } = useItinerary();
+  const { itineraryInfo, isLoading } = useItineraryStore();
   const daywise = itineraryInfo?.acf?.daywise;
 
-  if (loading || !daywise || Object.keys(daywise).length === 0) return null;
+  if (isLoading || !daywise || Object.keys(daywise).length === 0) return null;
 
   const validDays = Object.entries(daywise).filter(([_, item]: any) => item?.title && item?.image);
 

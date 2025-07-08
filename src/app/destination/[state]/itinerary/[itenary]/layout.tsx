@@ -45,7 +45,7 @@ const LayoutStructure = ({ children, params }: LayoutStructureProps) => {
             <button className="text-gray-500">Daywise</button>
           </Link>
           <Link href={`/destination/${state}/itinerary/${itineraryInfo?.slug}/accomodation`}>
-            <button className="text-gray-500">Accommodations</button>
+            <button className="text-gray-500">Accommodation</button>
           </Link>
         </div>
       </div>

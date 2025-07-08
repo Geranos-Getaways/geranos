@@ -30,8 +30,12 @@ const ExperiencesCards = ({ state }: Prop) => {
 
         if (data && Array.isArray(data)) {
           const filtered = data.filter(
-            (item: any) => item?.acf?.offerings?.toLowerCase() === 'experiences'
+            (item: any) =>
+              item?.acf?.offerings?.toLowerCase() === 'experiences' &&
+              item?.acf?.destination?.post_title == `${state}`
           );
+
+          console.log('Geranost destingation State : ', filtered);
           setItineraries(filtered);
         }
       } catch (error) {
