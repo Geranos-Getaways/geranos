@@ -40,10 +40,11 @@ const Page = ({ params }: PageProp) => {
       try {
         setIsLoading(true);
         const res = await fetch(
-          `https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?slug=${itenary}`
+          `https://dashboard.geranosgetaways.com/wp-json/wp/v2/offerings?slug=${itenary}`
         );
 
         const data = await res.json();
+       
         setItineraryInfo(data[0]);
         setIsLoading(false);
       } catch (error) {

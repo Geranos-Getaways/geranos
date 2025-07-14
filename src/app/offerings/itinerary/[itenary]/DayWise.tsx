@@ -9,6 +9,8 @@ const DayWise = () => {
   const { itineraryInfo, isLoading } = useItineraryStore();
   const daywise = itineraryInfo?.acf?.daywise;
 
+  console.log('daywise', itineraryInfo);
+
   if (isLoading || !daywise || Object.keys(daywise).length === 0) return null;
 
   const validDays = Object.entries(daywise).filter(([_, item]: any) => item?.title && item?.image);

@@ -99,7 +99,7 @@ const Page = () => {
                 const href =
                   item.type === 'itinerary'
                     ? `/destination/${destination}/itinerary/${item.slug}`
-                    : `#`; // or simply `/offerings/${item.slug}` if default route is configured
+                    : `/offerings/itinerary/${item.slug}`; // or simply `/offerings/${item.slug}` if default route is configured
 
                 return (
                   <Link key={item.id} href={href}>

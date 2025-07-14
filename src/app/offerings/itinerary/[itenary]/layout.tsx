@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import defaultImage from '../../../../../public/global/Punjab.webp';
 import SingleItenarySidebar from './SingleItenarySidebar';
@@ -10,6 +10,7 @@ import {
   CustomItineraryDestinationProvider,
   useCustomItineraryDestination,
 } from './CustomItineraryDestinationContext';
+import useCustomItineraryStore from './useCustomItineraryStore';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -18,12 +19,20 @@ interface LayoutProps {
 
 const LayoutShell: React.FC<LayoutProps> = ({ children, params }) => {
   const { itineraryInfo, isLoading } = useCustomItineraryDestination();
+  const setItineraryInfo = useCustomItineraryStore((state) => state.setItineraryInfo);
+  const setIsLoading = useCustomItineraryStore((state) => state.setIsLoading);
   const { acf } = itineraryInfo || {};
   const { itenary } = params;
+
+  useEffect(() => {
+    setItineraryInfo(itineraryInfo);
+    setIsLoading(isLoading);
+  }, [itineraryInfo, isLoading, setItineraryInfo, setIsLoading]);
 
   if (isLoading) {
     return <div className="py-20 text-center">Loading itinerary…</div>;
   }
+  
 
   return (
     <>
@@ -40,15 +49,21 @@ const LayoutShell: React.FC<LayoutProps> = ({ children, params }) => {
       {/* Navigation Tabs */}
       <div className="relative z-10 -mt-8 flex justify-center">
         <div className="bg-white rounded-full shadow-md border border-gray-200 px-4 py-1 sm:px-6 sm:py-2 flex gap-4 sm:gap-6 text-sm sm:text-base">
-          {['overview', 'daywise', 'accomodation'].map((tab) => (
-            <Link
-              key={tab}
-              href={`/offerings/itinerary/${itenary}/${tab}`}
-              className="text-gray-600 hover:text-black"
-            >
-              {tab.charAt(0).toUpperCase() + tab.slice(1)}
-            </Link>
-          ))}
+          {['overview', 'daywise', 'accomodation'].map((tab) => {
+            let href = `/offerings/itinerary/${itenary}`;
+            if (tab !== 'overview') {
+              href += `/${tab}`;
+            }
+            return (
+              <Link
+                key={tab}
+                href={href}
+                className="text-gray-600 hover:text-black"
+              >
+                {tab.charAt(0).toUpperCase() + tab.slice(1)}
+              </Link>
+            );
+          })}
         </div>
       </div>
 
