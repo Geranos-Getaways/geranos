@@ -95,7 +95,10 @@ const Page = ({ params }: { params: { state: string } }) => {
             <button
               className="mt-6 inline-flex items-center px-6 py-2 border border-blue-600 text-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition"
               onClick={() => {
-                setExploreVisibility(!exploreVisibility);
+                setExploreVisibility((prev) => {
+                  if (!prev) setActiveSection('ataglance');
+                  return !prev;
+                });
               }}
             >
               Explore More →
@@ -106,11 +109,8 @@ const Page = ({ params }: { params: { state: string } }) => {
             <div className="relative mt-20 px-4 md:px-10 py-10 w-full max-w-screen-xl mx-auto">
               <div className="flex flex-col md:flex-row gap-8">
                 {/* Sidebar Navigation */}
-                <aside className="w-full md:w-1/4 h-fit sticky top-[93px] md:top-28 bg-white  ">
-                  <ul
-                    className={`flex md:block overflow-x-auto md:overflow-visible whitespace-nowrap md:whitespace-normal 
-            text-gray-700 font-medium text-sm sm:text-base gap-2 md:gap-0 pb-2 md:pb-0 border-b md:border-none ${styles.explore}`}
-                  >
+                <aside className="w-full md:w-1/4 pt-6 h-fit sticky top-[93px] md:top-28 bg-white">
+                  <ul className={`flex md:block overflow-x-auto md:overflow-visible whitespace-nowrap md:whitespace-normal text-gray-700 font-medium text-sm sm:text-base gap-2 md:gap-0 pb-2 md:pb-0 border-b md:border-none ${styles.explore}`}>
                     {[
                       { id: 'ataglance', label: 'At a Glance' },
                       { id: 'cultureandhistory', label: 'Culture & History' },
@@ -121,46 +121,31 @@ const Page = ({ params }: { params: { state: string } }) => {
                       { id: 'traveltips', label: 'Travel Tips' },
                     ].map(({ id, label }) => (
                       <li key={id} className="shrink-0">
-                        <a
-                          href={`#${id}`}
-                          className={`block px-4 py-2 transition-colors border-b-2 md:border-l-4 md:border-b-0 ${
+                        <button
+                          type="button"
+                          onClick={() => setActiveSection(id)}
+                          className={`block w-full text-left px-4 py-2 transition-colors border-b-2 md:border-l-4 md:border-b-0 ${
                             activeSection === id
                               ? 'text-blue-600 font-semibold border-blue-600 bg-blue-50'
                               : 'text-gray-700 hover:text-blue-600 border-transparent'
                           }`}
                         >
                           {label}
-                        </a>
+                        </button>
                       </li>
                     ))}
                   </ul>
                 </aside>
 
-                {/* Main Content Sections */}
-                <main
-                  className={`w-full md:w-3/4  p-6 rounded-xl shadow-sm h-[700px] overflow-y-scroll scroll-smooth scroll-pt-28 custom-scrollbar ${styles.explore}`}
-                >
-                  <section id="ataglance">
-                    <AtAGlance />
-                  </section>
-                  <section id="cultureandhistory">
-                    <CultureAndHistory />
-                  </section>
-                  <section id="traveletiquettes">
-                    <TravelEtiquettes />
-                  </section>
-                  <section id="thingstodo">
-                    <ThingsToDo />
-                  </section>
-                  <section id="eatandshop">
-                    <EatAndShop />
-                  </section>
-                  <section id="gettingaround">
-                    <GettingAround />
-                  </section>
-                  <section id="traveltips">
-                    <TravelTips />
-                  </section>
+                {/* Main Content (Tab Outlet) */}
+                <main className="w-full md:w-3/4 p-6 pt-6 rounded-xl shadow-sm">
+                  {activeSection === 'ataglance' && <AtAGlance />}
+                  {activeSection === 'cultureandhistory' && <CultureAndHistory />}
+                  {activeSection === 'traveletiquettes' && <TravelEtiquettes />}
+                  {activeSection === 'thingstodo' && <ThingsToDo />}
+                  {activeSection === 'eatandshop' && <EatAndShop />}
+                  {activeSection === 'gettingaround' && <GettingAround />}
+                  {activeSection === 'traveltips' && <TravelTips />}
                 </main>
               </div>
             </div>

@@ -8,7 +8,7 @@ const AtAGlance = () => {
 
   return (
     <div>
-      <h2 className="mb-3 text-4xl font-semibold">At A Glance</h2>
+      <h2 className="">At A Glance</h2>
       <div
         dangerouslySetInnerHTML={{ __html: destination?.acf?.explore?.at_a_glance }}
         className={styles.explore}

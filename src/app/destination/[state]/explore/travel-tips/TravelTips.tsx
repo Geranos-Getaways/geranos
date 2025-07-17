@@ -9,7 +9,7 @@ const TravelTips = () => {
     
     return (
       <div>
-        <h2 className='mb-3 text-4xl font-semibold'>Travel Tips</h2>
+        <h2 className=''>Travel Tips</h2>
         <div dangerouslySetInnerHTML={{__html: destination?.acf?.explore?.travel_tips}} className={styles.explore}>
   
         </div>

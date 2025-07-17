@@ -6,6 +6,21 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
+/* INTER VARIABLE FONT */
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+}
+
 /* BROPELLA */
 @font-face {
   font-family: 'Bropella';
@@ -39,81 +54,72 @@ body {
   font-weight: 700;
   font-style: italic;
 }
-/* Add more as needed (Light, Thin, Black, etc.) */
 
-/* styles/global.css */
+/* SCROLLBARS */
 .custom-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: #2676ff #f0f0f0; /* thumb, track */
+  scrollbar-color: #2676ff #f0f0f0;
 }
-
 .custom-scrollbar::-webkit-scrollbar {
   width: 6px;
 }
-
 .custom-scrollbar::-webkit-scrollbar-track {
   background: #f0f0f0;
 }
-
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background-color: #2676ff;
   border-radius: 10px;
   border: 2px solid transparent;
   background-clip: content-box;
 }
-
-/* Thin, styled horizontal scrollbar */
 .thin-scrollbar::-webkit-scrollbar {
   height: 6px;
 }
 .thin-scrollbar::-webkit-scrollbar-thumb {
-  background-color: #a0aec0; /* neutral gray */
+  background-color: #a0aec0;
   border-radius: 10px;
 }
 .thin-scrollbar::-webkit-scrollbar-track {
   background-color: transparent;
 }
-
 .thin-scrollbar {
-  scrollbar-width: thin; /* Firefox */
+  scrollbar-width: thin;
   scrollbar-color: #a0aec0 transparent;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+/* TYPOGRAPHY */
+h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
+  font-family: 'Inter';
 }
 
-h2,
-h3,
-h4 {
+
+
+h2{
+  font-size: 1.6rem;
+}
+
+h3, h4 {
   font-size: 1.2rem;
-  margin: 1.4rem 0px 0px 0px;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-a,
-p,
-ul,
-li {
-  font-family: 'lato';
-}
 
-p,
-ul,
-li {
+
+p, ul, li, a {
   color: #6d6d68;
+  font-family: 'Inter';
 }
 
+p{
+  line-height: 1.8rem;
+}
+
+strong{
+  font-weight: 600;
+  color: #000;
+}
+
+/* DESIGN TOKENS */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -169,18 +175,18 @@ li {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
     background-color: #f9fafb;
   }
 }
 
+/* COMPONENT OVERRIDES */
 .postContParaFixCstm p {
   margin-bottom: 20px;
   font-size: 16px;
@@ -188,38 +194,33 @@ li {
 .postContParaFixCstm ul {
   margin-bottom: 16px;
 }
-
 .postContParaFixCstm img {
   margin-bottom: 26px;
 }
-
 .postContParaFixCstm li {
   list-style-type: initial;
   margin-left: 16px;
 }
-
 .postContParaFixCstm h2 {
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 22px;
 }
-
 .postContParaFixCstm a {
   color: #246beb;
   font-weight: bold;
   text-decoration: underline;
 }
 
+/* CAROUSEL NAVIGATION FIXES */
 .aCstmClass .overflow-hidden {
   height: 100%;
 }
-
 .aCstmClass .PrevNextBtnCstmCls button {
   background: none !important;
   width: 50px !important;
   height: 50px !important;
 }
-
 .aCstmClass .PrevNextBtnCstmCls button:hover {
   background: white !important;
 }
@@ -228,6 +229,7 @@ li {
   height: 30px !important;
 }
 
+/* RESPONSIVE BREAKPOINTS */
 @media (max-width: 620px) {
   .slick-prev {
     top: 90% !important;
@@ -238,31 +240,27 @@ li {
     right: 12% !important;
   }
 }
-
 @media (max-width: 767px) {
   .cstmClsTestiminial button {
     display: none !important;
   }
 }
 
-/* Footer CSS */
-
+/* FOOTER */
 .accCstmClsFtr:hover {
   text-decoration: none !important;
 }
-
 .testContCstCls {
   min-width: 100% !important;
 }
-
 .ff-powered-img {
   display: none !important;
 }
-
 img[btnvisibility='hidden'] {
   display: none !important;
 }
 
+/* SCROLL TEXT COLOR OVERRIDE */
 #scroll-container h1,
 #scroll-container h2,
 #scroll-container h3,

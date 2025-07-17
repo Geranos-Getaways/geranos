@@ -7,7 +7,7 @@ const GettingAround = () => {
 
   return (
     <div>
-      <h2 className="mb-3 text-4xl font-semibold">Getting Around</h2>
+      <h2 className="">Getting Around</h2>
       <div
         dangerouslySetInnerHTML={{ __html: destination?.acf?.explore?.getting_around }}
         className={styles.explore}
