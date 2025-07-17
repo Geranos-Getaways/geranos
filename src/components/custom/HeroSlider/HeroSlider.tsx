@@ -34,10 +34,13 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ slides, title, subheading }) =>
       className="relative w-full h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-[65vh] xl:h-[70vh] overflow-hidden"
       id="destination-hero-section"
     >
-      <div
-        className="absolute inset-0 bg-cover bg-center transition-all duration-1000"
-        style={{ backgroundImage: `url(${slideImages[currentIndex]})` }}
-      >
+  <div
+  className="absolute inset-0 bg-cover transition-all duration-1000"
+  style={{ 
+    backgroundImage: `url(${slideImages[currentIndex]})`, 
+    backgroundPosition: 'top center' 
+  }}
+>
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>
       </div>
 

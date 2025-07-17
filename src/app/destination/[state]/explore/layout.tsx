@@ -1,6 +1,6 @@
 'use client';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './explore.module.css';
 
 interface LayoutProps {
@@ -10,6 +10,7 @@ interface LayoutProps {
 
 const Layout = ({ children, params }: LayoutProps) => {
   const { state } = params;
+  const [activeSection, setActiveSection] = useState<string>('ataglance');
 
   return (
     <div className="flex flex-col items-center">
