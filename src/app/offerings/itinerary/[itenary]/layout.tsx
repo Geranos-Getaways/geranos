@@ -84,6 +84,15 @@ const LayoutShell: React.FC<LayoutProps> = ({ children, params }) => {
 const Layout: React.FC<LayoutProps> = ({ children, params }) => (
   <CustomItineraryDestinationProvider slug={params.itenary}>
     <LayoutShell params={params}>{children}</LayoutShell>
+    <div className="max-w-7xl mx-auto px-4 mt-8">
+      <Link href="/offerings/tour-packages">
+        <button
+          className="bg-[#0096c7] text-white py-2 px-6 rounded font-semibold hover:bg-[#0077a6] transition"
+        >
+          Back to Tour Packages
+        </button>
+      </Link>
+    </div>
   </CustomItineraryDestinationProvider>
 );
 

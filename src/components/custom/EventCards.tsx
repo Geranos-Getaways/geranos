@@ -31,6 +31,13 @@ const EventCards = ({
         backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0) 20%, rgba(0,0,0,0.8)), url(${featuredImage})`,
       }}
     >
+      {/* Days/Nights Badge */}
+      <div className="absolute top-2 left-2 rounded-md px-2 py-0.5 bg-black/40">
+        <span className="text-xs font-normal text-white tracking-tight">
+          {days}D {nights}N
+        </span>
+      </div>
+
       {/* Rating Badge */}
       <div className="absolute top-2 right-2 rounded-full px-3 py-1 flex items-center gap-1 bg-[rgb(75_75_75_/_45%)]">
         <StarsIcon className="text-yellow-400 w-4 h-4" />

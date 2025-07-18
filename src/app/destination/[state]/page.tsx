@@ -106,7 +106,7 @@ const Page = ({ params }: { params: { state: string } }) => {
           </div>
 
           {exploreVisibility && (
-            <div className="relative mt-20 px-4 md:px-10 py-10 w-full max-w-screen-xl mx-auto">
+            <div className="relative mt-2 px-4 md:px-10 py-2 w-full max-w-screen-xl mx-auto">
               <div className="flex flex-col md:flex-row gap-8">
                 {/* Sidebar Navigation */}
                 <aside className="w-full md:w-1/4 pt-6 h-fit sticky top-[93px] md:top-28 bg-white">

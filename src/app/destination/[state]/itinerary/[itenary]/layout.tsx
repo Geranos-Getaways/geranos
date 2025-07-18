@@ -68,14 +68,14 @@ const LayoutStructure = ({ children, params }: LayoutStructureProps) => {
 };
 
 const Layout = ({ children, params }: LayoutProps) => {
+  const { state } = params;
+
   useEffect(() => {
     const styleTag = document.createElement('style');
     styleTag.innerHTML = `
       #destination-hero-section, #destination-stick-layout-options {
         display: none !important;
       }
-
-      
     `;
     document.head.appendChild(styleTag);
     return () => {
@@ -86,6 +86,15 @@ const Layout = ({ children, params }: LayoutProps) => {
   return (
     <ItineraryProvider slug={params.itenary}>
       <LayoutStructure params={params}>{children}</LayoutStructure>
+      <div className="max-w-7xl mx-auto px-4 mt-8">
+        <Link href={`/destination/${state}/itineraries`}>
+          <button
+            className="bg-[#0096c7] text-white py-2 px-6 rounded font-semibold hover:bg-[#0077a6] transition"
+          >
+            Back to itinerary
+          </button>
+        </Link>
+      </div>
     </ItineraryProvider>
   );
 };

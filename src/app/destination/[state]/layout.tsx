@@ -69,9 +69,9 @@ const Layout = ({ children, params }: LayoutProps) => {
         </div>
 
         {/* CUSTOMIZE TRIP FORM */}
-        <div className="cta-footer my-8">
+        {/* <div className="cta-footer my-8">
           <CustomizeTrip />
-        </div>
+        </div> */}
       </div>
     </DestinationContext.Provider>
   );
