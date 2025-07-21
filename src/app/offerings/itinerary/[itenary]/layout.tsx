@@ -11,6 +11,7 @@ import {
   useCustomItineraryDestination,
 } from './CustomItineraryDestinationContext';
 import useCustomItineraryStore from './useCustomItineraryStore';
+import CustomizeTrip from '@/components/custom/CustomizeTrip/CustomizeTrip';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -32,7 +33,6 @@ const LayoutShell: React.FC<LayoutProps> = ({ children, params }) => {
   if (isLoading) {
     return <div className="py-20 text-center">Loading itinerary…</div>;
   }
-  
 
   return (
     <>
@@ -55,11 +55,7 @@ const LayoutShell: React.FC<LayoutProps> = ({ children, params }) => {
               href += `/${tab}`;
             }
             return (
-              <Link
-                key={tab}
-                href={href}
-                className="text-gray-600 hover:text-black"
-              >
+              <Link key={tab} href={href} className="text-gray-600 hover:text-black">
                 {tab.charAt(0).toUpperCase() + tab.slice(1)}
               </Link>
             );
@@ -86,12 +82,11 @@ const Layout: React.FC<LayoutProps> = ({ children, params }) => (
     <LayoutShell params={params}>{children}</LayoutShell>
     <div className="max-w-7xl mx-auto px-4 mt-8">
       <Link href="/offerings/tour-packages">
-        <button
-          className="bg-[#0096c7] text-white py-2 px-6 rounded font-semibold hover:bg-[#0077a6] transition"
-        >
+        <button className="bg-[#0096c7] text-white py-2 px-6 rounded font-semibold hover:bg-[#0077a6] transition">
           Back to Tour Packages
         </button>
       </Link>
+      <CustomizeTrip />
     </div>
   </CustomItineraryDestinationProvider>
 );
