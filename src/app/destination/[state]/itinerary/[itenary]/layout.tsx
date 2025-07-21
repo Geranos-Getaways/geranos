@@ -6,6 +6,7 @@ import defaultImage from '../../../../../../public/global/Punjab.webp';
 import Link from 'next/link';
 import SingleItenarySidebar from './SingleItenarySidebar';
 import { ItineraryProvider, useItinerary } from './ItineraryContext';
+import CustomizeTrip from '@/components/custom/CustomizeTrip/CustomizeTrip';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -88,12 +89,11 @@ const Layout = ({ children, params }: LayoutProps) => {
       <LayoutStructure params={params}>{children}</LayoutStructure>
       <div className="max-w-7xl mx-auto px-4 mt-8">
         <Link href={`/destination/${state}/itineraries`}>
-          <button
-            className="bg-[#0096c7] text-white py-2 px-6 rounded font-semibold hover:bg-[#0077a6] transition"
-          >
+          <button className="bg-[#0096c7] text-white py-2 px-6 rounded font-semibold hover:bg-[#0077a6] transition">
             Back to itinerary
           </button>
         </Link>
+        <CustomizeTrip />
       </div>
     </ItineraryProvider>
   );
