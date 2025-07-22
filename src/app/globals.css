@@ -98,6 +98,11 @@ h2, h3, h4 {
   margin: 1.4rem 0px 0px 0px;
 }
 
+@media (max-width: 768px) {
+  h2, h3, h4 { margin: 0.2rem 0px 0px 0px;
+  }
+}
+
 p, ul, li, a {
   color: #6d6d68;
   font-family: 'Inter';

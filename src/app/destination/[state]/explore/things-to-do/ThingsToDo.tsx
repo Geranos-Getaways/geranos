@@ -29,10 +29,10 @@ const ThingsToDo = () => {
       {filteredTodos.map((todo: any, idx: number) => (
         <div
           key={idx}
-          className="flex items-start gap-4 mb-6 p-4 rounded-lg shadow bg-white"
+          className="flex flex-col md:flex-row items-start gap-4 mb-6 p-4 rounded-lg shadow bg-white"
         >
           {/* Left: Image */}
-          <div className="w-32 h-32 flex-shrink-0 bg-gray-100 rounded overflow-hidden">
+          <div className="w-full h-48 md:w-32 md:h-32 flex-shrink-0 bg-gray-100 rounded overflow-hidden mb-4 md:mb-0">
             <img
               src={todo.image}
               alt={todo.title}

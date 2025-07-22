@@ -64,7 +64,7 @@ const Layout = ({ children, params }: LayoutProps) => {
         </div>
 
         {/* PAGE CONTENT */}
-        <div className="py-2 px-4" id="destination-state-layout">
+        <div className="py-2 px-0 md:px-4" id="destination-state-layout">
           {children}
         </div>
 
