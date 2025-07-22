@@ -40,7 +40,7 @@ export async function POST(req: NextRequest) {
 
     // Send request to CRM
     const response = await axios.post(
-      'https://travbizz.net/holidaybreak/website_enquiry.php',
+      'https://crm.geranosgetaways.com/websitequery.php',
       postData,
       {
         headers: {

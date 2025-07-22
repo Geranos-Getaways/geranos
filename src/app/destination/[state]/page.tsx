@@ -9,13 +9,49 @@ import TravelTips from './explore/travel-tips/TravelTips';
 import AtAGlance from './explore/at-a-glance/AtAGlance';
 import TravelEtiquettes from './explore/travel-etiquettes/TravelEtiquettes';
 import GettingAround from './explore/getting-around/GettingAround';
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from '@/components/ui/carousel';
+import EventCards from '@/components/custom/EventCards';
+import Link from 'next/link';
+
+const defaultImage = '/public/global/destinations/uttarakhand-tracking.png'; // Update to a valid fallback image path
 
 const Page = ({ params }: { params: { state: string } }) => {
   const destination = useDestination();
   const [exploreVisibility, setExploreVisibility] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
+  // State for itineraries
+  const [itineraries, setItineraries] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
   const { state } = params;
+
+  useEffect(() => {
+    const fetchItenaries = async () => {
+      try {
+        const res = await fetch(
+          `https://dashboard.geranosgetaways.com/wp-json/wp/v2/itineraries?destination_of_itenary=${state}`
+        );
+        const data = await res.json();
+        if (data && Array.isArray(data)) {
+          const filtered = data.filter(
+            (item: any) =>
+              (item?.acf?.offerings?.toLowerCase() === 'tour packages' ||
+               item?.acf?.offerings?.toLowerCase() === 'weekend getaways') &&
+              item?.acf?.destination?.post_title?.toLowerCase() === state
+          );
+          setItineraries(filtered);
+        } else {
+          setItineraries([]);
+        }
+      } catch (error) {
+        console.error('Something went wrong while fetching Itineraries', error);
+        setItineraries([]);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchItenaries();
+  }, [state]);
 
   useEffect(() => {
     const sections = document.querySelectorAll('main > div[id]');
@@ -110,7 +146,9 @@ const Page = ({ params }: { params: { state: string } }) => {
               <div className="flex flex-col md:flex-row gap-8">
                 {/* Sidebar Navigation */}
                 <aside className="w-full md:w-1/4 pt-6 h-fit sticky top-[93px] md:top-28 bg-white">
-                  <ul className={`flex md:block overflow-x-auto md:overflow-visible whitespace-nowrap md:whitespace-normal text-gray-700 font-medium text-sm sm:text-base gap-2 md:gap-0 pb-2 md:pb-0 border-b md:border-none ${styles.explore}`}>
+                  <ul
+                    className={`flex md:block overflow-x-auto md:overflow-visible whitespace-nowrap md:whitespace-normal text-gray-700 font-medium text-sm sm:text-base gap-2 md:gap-0 pb-2 md:pb-0 border-b md:border-none ${styles.explore}`}
+                  >
                     {[
                       { id: 'ataglance', label: 'At a Glance' },
                       { id: 'cultureandhistory', label: 'Culture & History' },
@@ -149,6 +187,39 @@ const Page = ({ params }: { params: { state: string } }) => {
                 </main>
               </div>
             </div>
+          )}
+        </section>
+
+        {/* Itineraries Slider Section */}
+        <section className="py-10">
+          <h2 className="text-3xl font-bold mb-2 text-center">Tour Packages</h2>
+          <p className="text-gray-500 mb-8 text-center">Current favourites for travellers like you</p>
+          {loading ? (
+            <div className="text-center py-10">Loading itineraries...</div>
+          ) : itineraries.length === 0 ? (
+            <div className="text-center py-10 text-gray-500">No itineraries found for this destination.</div>
+          ) : (
+            <Carousel>
+              <CarouselContent>
+                {itineraries.map((item: any) => (
+                  <CarouselItem className="md:basis-1/2 lg:basis-1/5" key={item?.title?.rendered}>
+                    <Link href={`/destination/${state}/itinerary/${item?.slug}`}>
+                      <EventCards
+                        title={item?.title?.rendered}
+                        destination={item?.acf?.destination?.post_title}
+                        days={item?.acf?.days}
+                        nights={item?.acf?.nights}
+                        price={item?.acf?.starting_price}
+                        ratings={item?.acf?.ratings}
+                        featuredImage={item?.acf?.thumbnail || defaultImage}
+                      />
+                    </Link>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious />
+              <CarouselNext />
+            </Carousel>
           )}
         </section>
       </div>
