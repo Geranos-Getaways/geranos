@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Accordion,
   AccordionContent,
@@ -12,6 +12,21 @@ interface MobileNavigationProps {
 }
 
 const MobileNavigation: React.FC<MobileNavigationProps> = ({ onNavigate }) => {
+  const [locations, setLocations] = useState<{ title: string; href: string }[]>([]);
+
+  useEffect(() => {
+    async function fetchDestinations() {
+      const res = await fetch('https://dashboard.geranosgetaways.com/wp-json/wp/v2/destinations');
+      const data = await res.json();
+      const formatted = data.map((item: any) => ({
+        title: item.title.rendered,
+        href: `/destination/${item.slug}`,
+      }));
+      setLocations(formatted);
+    }
+    fetchDestinations();
+  }, []);
+
   return (
     <div className="text-left">
       <Accordion type="single" collapsible className="w-full">
@@ -19,16 +34,13 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({ onNavigate }) => {
           <AccordionTrigger>Destinations</AccordionTrigger>
           <AccordionContent>
             <ul className="text-xl flex flex-col gap-4 text-[#2F6BEB] font-semibold font-EduVICWANTBeginner">
-              <li>
-                <Link href="/destination/punjab" onClick={onNavigate}>
-                  Punjab
-                </Link>
-              </li>
-              <li>
-                <Link href="/destination/uttarakhand" onClick={onNavigate}>
-                  Uttarakhand
-                </Link>
-              </li>
+              {locations.map((location) => (
+                <li key={location.href}>
+                  <Link href={location.href} onClick={onNavigate}>
+                    {location.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </AccordionContent>
         </AccordionItem>

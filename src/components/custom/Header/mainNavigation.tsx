@@ -15,43 +15,44 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 
-const locations: { title: string; href: string; description: string }[] = [
-  {
-    title: 'Punjab',
-    href: '/destination/punjab',
-    // href: "/destination/punjab",
-    description: '',
-  },
-  {
-    title: 'Uttarakhand',
-    href: '/destination/uttarakhand',
-    // href: '/destination/uttarakhand',
-    description: '',
-  },
-];
-
-const experiences: { title: string; href: string; description: string }[] = [
-  {
-    title: 'Tour Packages',
-    href: '/offerings/tour-packages',
-    // href: '/offerings/tour-packages',
-    description: '',
-  },
-  {
-    title: 'Weekend Getaways',
-    href: '/offerings/weekend-getaways',
-    // href: '/offerings/weekend-getaways',
-    description: '',
-  },
-  {
-    title: 'Experiences',
-    href: '/offerings/experiences',
-    // href: '/offerings/experiences',
-    description: '',
-  },
-];
-
 export default function NavigationMenuDemo() {
+  const [locations, setLocations] = React.useState<{ title: string; href: string }[]>([]);
+
+  React.useEffect(() => {
+    async function fetchDestinations() {
+      const res = await fetch('https://dashboard.geranosgetaways.com/wp-json/wp/v2/destinations');
+      const data = await res.json();
+      // Map to your format
+      const formatted = data.map((item: any) => ({
+        title: item.title.rendered,
+        href: `/destination/${item.slug}`,
+      }));
+      setLocations(formatted);
+    }
+    fetchDestinations();
+  }, []);
+
+  const experiences: { title: string; href: string; description: string }[] = [
+    {
+      title: 'Tour Packages',
+      href: '/offerings/tour-packages',
+      // href: '/offerings/tour-packages',
+      description: '',
+    },
+    {
+      title: 'Weekend Getaways',
+      href: '/offerings/weekend-getaways',
+      // href: '/offerings/weekend-getaways',
+      description: '',
+    },
+    {
+      title: 'Experiences',
+      href: '/offerings/experiences',
+      // href: '/offerings/experiences',
+      description: '',
+    },
+  ];
+
   return (
     <>
       <NavigationMenu>
@@ -61,10 +62,10 @@ export default function NavigationMenuDemo() {
               Destinations
             </NavigationMenuTrigger>
             <NavigationMenuContent>
-              <ul className=" grid w-[400px] gap-3 p-4 md:w-[330px] md:grid-cols-1 lg:w-[330px] ">
+              <ul className="grid w-[400px] gap-3 p-4 md:w-[330px] md:grid-cols-1 lg:w-[330px]">
                 {locations.map((location) => (
-                  <Link href={location?.href} key={location.title}>
-                    <ListItem title={location.title}>{location.description}</ListItem>
+                  <Link href={location.href} key={location.title}>
+                    <ListItem title={location.title} />
                   </Link>
                 ))}
               </ul>

@@ -114,9 +114,13 @@ const PageTemplate = ({ params }: PageProp) => {
           const card = singleExperience?.acf?.experiences_featured_cards?.[key];
           const colors = ['blue', 'orange', 'purple'];
           return (
-            <div key={key} className={`bg-${colors[i]}-50 p-6 rounded-lg shadow`}>
+            <div
+              key={key}
+              className="p-6 rounded-lg shadow"
+              style={{ backgroundColor: card?.card_background_color || '#f9fafb' }}
+            >
               <h4 className="font-semibold text-lg">{card?.title}</h4>
-              <p className={`text-${colors[i]}-600 mt-2`}>{card?.description}</p>
+              <p className="mt-2">{card?.description}</p>
             </div>
           );
         })}

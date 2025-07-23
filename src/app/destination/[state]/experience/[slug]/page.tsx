@@ -115,7 +115,6 @@ const PageTemplate = ({ params }: PageProp) => {
         <div className="flex gap-4 snap-x snap-mandatory">
           {['card1', 'card2', 'card3'].map((key, i) => {
             const card = singleExperience?.acf?.experiences_featured_cards?.[key];
-            const colors = ['blue', 'orange', 'purple'];
             return (
               <div
                 key={key}
@@ -123,14 +122,14 @@ const PageTemplate = ({ params }: PageProp) => {
             snap-start
             flex-shrink-0
             w-[85%] sm:w-[300px] md:w-1/3
-            bg-${colors[i]}-50 p-4 rounded-xl shadow
+            p-4 rounded-xl shadow
           `}
-                style={{ backgroundColor: card?.card_background_color || '#f9fafb' }}
+                style={{ backgroundColor: card?.card_background_color || '#f9fafb', color: '#222' }}
               >
                 <h4 className="font-semibold text-base md:text-lg mb-2 break-words">
                   {card?.title}
                 </h4>
-                <p className={`text-${colors[i]}-600 text-sm md:text-base break-words`}>
+                <p className="text-sm md:text-base break-words">
                   {card?.description}
                 </p>
               </div>
