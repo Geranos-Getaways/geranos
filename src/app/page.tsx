@@ -3,6 +3,7 @@ import DestinationsCards from '@/components/custom/Content/DestinationsCards/Des
 import Testimonials from '@/components/custom/Testimonials/Testimonials';
 import HeroSlickSlider from '@/components/custom/Global/HeroHomeSlider/SimpleSlider';
 import { Inter } from 'next/font/google';
+import LatestBlogs from '@/components/custom/LatestBlogs/LatestBlogs';
 
 const inter = Inter({ subsets: ['latin'], weight: ['400', '700'] });
 
@@ -87,9 +88,9 @@ export default async function Home() {
         /> */}
       </div>
 
-      {/* <div className="mt-2 md:mt-12 w-full">
-        <Testimonials />
-      </div> */}
+      {/* Blog Section */}
+
+      <LatestBlogs />
 
       <div className="mt-2 md:mt-12 w-full">
         <Testimonials />

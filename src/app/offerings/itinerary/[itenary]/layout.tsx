@@ -67,10 +67,9 @@ const LayoutShell: React.FC<LayoutProps> = ({ children, params }) => {
       <div className="max-w-7xl mx-auto px-4 mt-12 flex flex-col lg:flex-row gap-12">
         <div className="w-full lg:flex-1">{children}</div>
         <div className="w-full lg:w-[320px] shrink-0 hidden lg:block">
-          <SingleItenarySidebar
-            destination={acf?.destination?.post_title}
-            price={acf?.starting_price}
-          />
+          <div className="lg:col-span-1">
+            <CustomizeTrip heroImage={acf?.thumbnail || '/global/Punjab.webp'} />
+          </div>
         </div>
       </div>
     </>
@@ -86,7 +85,9 @@ const Layout: React.FC<LayoutProps> = ({ children, params }) => (
           Back to Tour Packages
         </button>
       </Link>
-      <CustomizeTrip />
+      <div className="visible md:hidden">
+        <CustomizeTrip />
+      </div>
     </div>
   </CustomItineraryDestinationProvider>
 );

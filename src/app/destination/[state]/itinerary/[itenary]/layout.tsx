@@ -58,10 +58,14 @@ const LayoutStructure = ({ children, params }: LayoutStructureProps) => {
 
         {/* Sidebar */}
         <div className="w-full lg:w-[320px] shrink-0 hidden lg:block">
-          <SingleItenarySidebar
+          {/* <SingleItenarySidebar
             destination={acf?.destination?.post_title}
             price={acf?.starting_price}
-          />
+          /> */}
+
+          <div className="lg:col-span-1">
+            <CustomizeTrip heroImage={acf?.thumbnail || '/global/Punjab.webp'} />
+          </div>
         </div>
       </div>
     </>
@@ -93,7 +97,10 @@ const Layout = ({ children, params }: LayoutProps) => {
             Back to itinerary
           </button>
         </Link>
-        <CustomizeTrip />
+
+        <div className="visible md:hidden">
+          <CustomizeTrip />
+        </div>
       </div>
     </ItineraryProvider>
   );
