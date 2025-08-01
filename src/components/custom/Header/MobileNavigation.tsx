@@ -27,13 +27,22 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({ onNavigate }) => {
     fetchDestinations();
   }, []);
 
+  // Classes for styling
+  const mainNavLinkClasses =
+    'w-full text-lg font-semibold text-black font-EduVICWANTBeginner py-4 !no-underline !not-italic'; // Override italics
+  const subLinkClasses =
+    'text-base flex flex-col gap-4 text-[#2F6BEB] font-semibold font-EduVICWANTBeginner';
+
   return (
     <div className="text-left">
       <Accordion type="single" collapsible className="w-full">
+        {/* Destinations */}
         <AccordionItem value="item-1">
-          <AccordionTrigger>Destinations</AccordionTrigger>
+          <AccordionTrigger className={mainNavLinkClasses}>
+            <p className="text-black font-medium">Destinations</p>
+          </AccordionTrigger>
           <AccordionContent>
-            <ul className="text-xl flex flex-col gap-4 text-[#2F6BEB] font-semibold font-EduVICWANTBeginner">
+            <ul className={subLinkClasses}>
               {locations.map((location) => (
                 <li key={location.href}>
                   <Link href={location.href} onClick={onNavigate}>
@@ -44,10 +53,14 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({ onNavigate }) => {
             </ul>
           </AccordionContent>
         </AccordionItem>
+
+        {/* Offerings */}
         <AccordionItem value="item-2">
-          <AccordionTrigger>Offerings</AccordionTrigger>
+          <AccordionTrigger className={mainNavLinkClasses}>
+            <p className="text-black font-medium">Offerings</p>
+          </AccordionTrigger>
           <AccordionContent>
-            <ul className="text-xl flex flex-col gap-4 text-[#2F6BEB] font-semibold font-EduVICWANTBeginner">
+            <ul className={subLinkClasses}>
               <li>
                 <Link href="/offerings/tour-packages" onClick={onNavigate}>
                   Tour Packages
@@ -66,21 +79,14 @@ const MobileNavigation: React.FC<MobileNavigationProps> = ({ onNavigate }) => {
             </ul>
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="item-3">
-          <p className="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline">
-            <a href="/blog" onClick={onNavigate}>
-              Blogs
-            </a>
-          </p>
-        </AccordionItem>
-        {/* <AccordionItem value="item-4">
-          <p className="flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline">
-            <a href="/contact" onClick={onNavigate}>
-              Contact
-            </a>
-          </p>
-        </AccordionItem> */}
       </Accordion>
+
+      {/* Blogs as a standalone link */}
+      <div className={mainNavLinkClasses}>
+        <Link href="/blog" onClick={onNavigate} className="text-black font-medium">
+          Blogs
+        </Link>
+      </div>
     </div>
   );
 };
