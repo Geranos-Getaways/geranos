@@ -29,7 +29,7 @@
 }
 
 @media (max-width: 768px) {
-  .richList li span {
+  .richList li span strong {
     font-size: 14px !important;
   }
 }
