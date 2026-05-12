@@ -3,18 +3,22 @@
 import React, { useState, useEffect } from 'react';
 
 interface HeroSliderProps {
-  slides: {
+  slides?: {
     [key: string]: string;
-  };
-  title: string;
-  subheading: string;
+  } | null;
+  title?: string;
+  subheading?: string;
 }
 
 const HeroSlider: React.FC<HeroSliderProps> = ({ slides, title, subheading }) => {
-  const slideImages = Object.values(slides);
+  const slideImages = slides
+    ? Object.values(slides).filter((slide): slide is string => typeof slide === 'string' && slide.trim() !== '')
+    : [];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
+    if (slideImages.length === 0) return;
+
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % slideImages.length);
     }, 5000);
@@ -22,12 +26,18 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ slides, title, subheading }) =>
   }, [slideImages.length]);
 
   const goToPrevious = () => {
+    if (slideImages.length === 0) return;
+
     setCurrentIndex((prevIndex) => (prevIndex === 0 ? slideImages.length - 1 : prevIndex - 1));
   };
 
   const goToNext = () => {
+    if (slideImages.length === 0) return;
+
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slideImages.length);
   };
+
+  const currentImage = slideImages[currentIndex];
 
   return (
     <div
@@ -37,7 +47,7 @@ const HeroSlider: React.FC<HeroSliderProps> = ({ slides, title, subheading }) =>
   <div
   className="absolute inset-0 bg-cover transition-all duration-1000"
   style={{ 
-    backgroundImage: `url(${slideImages[currentIndex]})`, 
+    backgroundImage: currentImage ? `url(${currentImage})` : undefined, 
     backgroundPosition: 'top center' 
   }}
 >
